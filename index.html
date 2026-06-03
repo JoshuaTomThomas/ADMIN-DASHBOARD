@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminOS // Strategic Command Deck v5.0</title>
+    <title>AdminOS // Strategic Command Deck</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -12,12 +12,6 @@
 <body>
     <div class="hud-scanline-matrix"></div>
     <div class="hud-ambient-glow"></div>
-
-    <div id="hud-toast-zone"></div>
-
-    <audio id="sfx-click" src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg" preload="auto"></audio>
-    <audio id="sfx-deploy" src="https://actions.google.com/sounds/v1/science_fiction/teleport.ogg" preload="auto"></audio>
-    <audio id="sfx-alert" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
     <div class="admin-wrapper">
         
@@ -30,24 +24,24 @@
                 <li class="nav-item active" data-target="overview-panel">
                     <div class="nav-capsule">
                         <span class="icon-node">⚏</span>
-                        <span class="label-node">01 // OVERVIEW</span>
+                        <span class="label-node">OVERVIEW</span>
                     </div>
                 </li>
                 <li class="nav-item" data-target="weather-panel">
                     <div class="nav-capsule">
                         <span class="icon-node">☼</span>
-                        <span class="label-node">02 // WEATHER</span>
+                        <span class="label-node">LIVE WEATHER</span>
                     </div>
                 </li>
                 <li class="nav-item" data-target="tasks-panel">
                     <div class="nav-capsule">
                         <span class="icon-node">⎔</span>
-                        <span class="label-node">03 // OPERATIONS</span>
+                        <span class="label-node">TASK MANAGER</span>
                     </div>
                 </li>
             </ul>
 
-            <div class="sidebar-telemetry-tag">SECURE CORE LINK // ACTIVE</div>
+            <div class="sidebar-telemetry-tag">SECURE CORE LINK // ON</div>
         </nav>
 
         <div class="main-content">
@@ -59,7 +53,7 @@
                 </div>
                 
                 <div class="header-center-divider">
-                    <span class="arrow-deco">▲</span> TAC-COM CONTROL LINK <span class="arrow-deco">▼</span>
+                    <span class="arrow-deco">▲</span> COGNITIVE FEED <span class="arrow-deco">▼</span>
                 </div>
 
                 <div class="header-status-block clock-block">
@@ -100,27 +94,12 @@
 
                         <div class="hud-nested-card green-tint">
                             <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                            <div class="card-header-label">AMBIENT CORE CONDUCTIVITY</div>
+                            <div class="card-header-label">AMBIENT HEAT CONDUCTION</div>
                             <div class="metric-display">
                                 <p id="stat-temp">--°C</p>
                                 <div class="hud-radial-loader">
                                     <div class="radial-pulse-core"></div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="hud-nested-card diagnostics-board" style="margin-top: 25px;">
-                        <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                        <div class="card-header-label">// PROCESSOR CORE METRICS LIVE STREAM</div>
-                        <div class="diag-flex-grid">
-                            <div class="diag-bar-container">
-                                <span>CPU_A [LOAD]: <strong id="cpu-a-text">0%</strong></span>
-                                <div class="diag-track"><div id="cpu-a-bar" class="diag-fill" style="width: 0%"></div></div>
-                            </div>
-                            <div class="diag-bar-container">
-                                <span>CPU_B [LOAD]: <strong id="cpu-b-text">0%</strong></span>
-                                <div class="diag-track"><div id="cpu-b-bar" class="diag-fill magenta" style="width: 0%"></div></div>
                             </div>
                         </div>
                     </div>
