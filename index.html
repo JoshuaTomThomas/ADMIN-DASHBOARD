@@ -11,15 +11,6 @@
 </head>
 <body>
     <div class="hud-screen-matrix"></div>
-    <div class="hud-glow-ambiance"></div>
-
-    <div id="hud-lockdown-screen" class="hidden">
-        <div class="lockdown-terminal">
-            <h1 class="glitch-text" data-text="CRITICAL COLD LOCKDOWN">CRITICAL COLD LOCKDOWN</h1>
-            <p>UNAUTHORIZED OPERATIONAL PIPELINE MANIFEST DETECTED</p>
-            <button id="clear-lockdown-btn">OVERRIDE SECURE LINK</button>
-        </div>
-    </div>
 
     <div id="hud-modal-overlay" class="hidden">
         <div class="cyber-window-box modal-box">
@@ -51,25 +42,22 @@
                 <li class="nav-item" data-target="tasks-panel">
                     <div class="nav-hex-frame">
                         <div class="hex-icon">⎔</div>
-                        <div class="hex-text">Task Operations</div>
+                        <div class="hex-text">Task Manager</div>
                     </div>
                 </li>
             </ul>
-            <div class="sidebar-status">CORE STREAM // ONLINE</div>
         </nav>
 
         <div class="main-content">
             <header class="top-bar">
                 <div class="top-bar-panel left-panel">
-                    <span class="pulse-node-green" id="system-status-indicator"></span>
-                    <div id="greeting">Systems Operational // Admin</div>
+                    <span class="pulse-node-green"></span>
+                    <div id="greeting">Systems Online // Admin</div>
                 </div>
                 <div class="top-bar-panel right-panel">
                     <div class="compass-widget">🧭</div>
                     <div id="clock">00:00:00</div>
-                    <div class="sys-power-icons">
-                        <span id="trigger-lockdown-mock" title="Manual Lockdown">⏻</span> 📶 🔲 ⚙
-                    </div>
+                    <div class="sys-power-icons">⏻ 📶 🔲 ⚙</div>
                 </div>
             </header>
 
@@ -80,10 +68,11 @@
                         <section id="overview-panel" class="dashboard-panel active">
                             <div class="cyber-window-box" draggable="true">
                                 <div class="window-header">
-                                    <span class="window-title">System Overview Data Matrix</span>
+                                    <span class="window-title">System Overview Analytics</span>
                                     <span class="window-dots">•••</span>
                                 </div>
                                 <div class="window-content-body">
+                                    
                                     <div class="inner-data-deck">
                                         <div class="pure-css-bar-chart">
                                             <span style="height: 40%"></span><span style="height: 75%"></span>
@@ -92,7 +81,7 @@
                                         </div>
                                         <div class="deck-metric-flex">
                                             <div class="metric-meta-group">
-                                                <span class="icon-label">📋 Total Registry Tasks</span>
+                                                <span class="icon-label">📋 Total Active Tasks</span>
                                                 <h2 id="stat-total-tasks">0</h2>
                                             </div>
                                             <div class="metric-meta-group right-align">
@@ -104,9 +93,7 @@
 
                                     <div class="inner-data-deck">
                                         <div class="mock-line-container">
-                                            <svg viewBox="0 0 100 30" class="svg-sparkline">
-                                                <path d="M0,25 Q15,5 30,20 T60,10 T90,15 L100,15" fill="none" stroke="#00f3ff" stroke-width="1.5"/>
-                                            </svg>
+                                            <canvas id="hud-line-sparkgraph" width="120" height="40"></canvas>
                                         </div>
                                         <div class="deck-metric-flex">
                                             <div class="metric-meta-group">
@@ -121,10 +108,12 @@
                                     </div>
 
                                     <div class="inner-data-deck">
-                                        <canvas id="hud-telemetry-oscillator" width="120" height="40"></canvas>
-                                        <div class="deck-metric-flex">
+                                        <div class="deck-metric-flex align-top">
+                                            <div class="canvas-pie-wrapper">
+                                                <canvas id="hud-pie-distribution" width="45" height="45"></canvas>
+                                            </div>
                                             <div class="metric-meta-group">
-                                                <span class="icon-label">⎔ Wave Matrix Feed</span>
+                                                <span class="icon-label">👥 Total System Load</span>
                                                 <h2 class="sync-total-field">0</h2>
                                             </div>
                                             <div class="metric-meta-group right-align">
@@ -133,31 +122,34 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </section>
                     </div>
 
                     <div class="hud-column-wrapper double-deck">
+                        
                         <section id="weather-panel" class="dashboard-panel active">
                             <div class="cyber-window-box" draggable="true">
                                 <div class="window-header">
-                                    <span class="window-title">Atmospheric Weather Substation</span>
+                                    <span class="window-title">Live Weather & Planetary Telemetry</span>
                                     <span class="window-dots">•••</span>
                                 </div>
                                 <div class="window-content-body split-weather-layout">
                                     <div class="weather-log-submodule">
                                         <div id="weather-display">
-                                            <p class="system-stream-text">Awaiting sensor data link...</p>
+                                            <p class="system-stream-text">Awaiting transceiver link...</p>
                                         </div>
                                         <div class="sync-footer">
                                             <span class="pulse-node"></span>
                                             <span id="sync-time">Last updated: Never</span>
                                         </div>
                                     </div>
+                                    
                                     <div class="satellite-globe-submodule">
                                         <div class="globe-viewport">
-                                            <div class="globe-mesh-lines"></div>
+                                            <canvas id="hud-matrix-globe" width="110" height="110"></canvas>
                                             <div class="radar-ping-sweep"></div>
                                         </div>
                                         <div class="sync-ring-wrapper">
@@ -171,7 +163,7 @@
                         <section id="tasks-panel" class="dashboard-panel active">
                             <div class="cyber-window-box" draggable="true">
                                 <div class="window-header">
-                                    <span class="window-title">Tactical Component Controller</span>
+                                    <span class="window-title">Task Operations Terminal</span>
                                     <span class="window-dots">•••</span>
                                 </div>
                                 <div class="window-content-body operational-flex-layout">
@@ -182,7 +174,7 @@
                                         </div>
                                         <div class="input-row">
                                             <label>Input</label>
-                                            <input type="text" id="todo-input" placeholder="Enter request vector message..." required autocomplete="off">
+                                            <input type="text" id="todo-input" placeholder="Enter request parameter..." required autocomplete="off">
                                         </div>
                                         <div class="input-row">
                                             <label>Description</label>
@@ -196,15 +188,15 @@
                                 </div>
                             </div>
                         </section>
-                    </div>
 
+                    </div>
                 </div>
 
                 <div class="hud-nested-card settings-panel">
                     <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                    <div class="card-header-label">SYSTEM CONFIGURATION DATA PROFILER</div>
+                    <div class="card-header-label">SYSTEM USER CONFIGURATION PREFERENCES</div>
                     <div class="settings-row">
-                        <label>SYSTEM ACCENT TINT:</label>
+                        <label>SYSTEM HIGHLIGHT TINT:</label>
                         <select id="setting-theme">
                             <option value="cyan">CYAN MATRIX</option>
                             <option value="magenta">MAGENTA OVERRIDE</option>
@@ -212,8 +204,8 @@
                         </select>
                     </div>
                     <div class="settings-row">
-                        <label>TARGET SENSOR DATA CITY:</label>
-                        <input type="text" id="setting-city" placeholder="e.g. London">
+                        <label>TARGET SENSOR GEOLOCATION CITY:</label>
+                        <input type="text" id="setting-city" placeholder="e.g. Paris">
                         <button id="save-settings-btn" class="hud-action-btn">COMMIT CONFIG_</button>
                     </div>
                 </div>
@@ -221,7 +213,5 @@
             </div>
         </div>
     </div>
-
-    <script type="module" src="app.js"></script>
 </body>
 </html>
