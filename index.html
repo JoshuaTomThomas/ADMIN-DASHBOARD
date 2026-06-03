@@ -3,66 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Admin Dashboard</title>
+    <title>AdminOS // Enterprise HUD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="hud-grid-overlay"></div>
+
     <div class="admin-wrapper">
         <nav class="sidebar">
-            <div class="sidebar-brand">AdminOS</div>
+            <div class="sidebar-brand">
+                AdminOS<span class="blink-cursor">_</span>
+            </div>
+            <div class="tech-divider"></div>
             <ul class="nav-links">
-                <li class="nav-item active" data-target="overview-panel">Overview</li>
-                <li class="nav-item" data-target="weather-panel">Live Weather</li>
-                <li class="nav-item" data-target="tasks-panel">Task Manager</li>
+                <li class="nav-item active" data-target="overview-panel">
+                    <span class="nav-icon">⚏</span> OVERVIEW
+                </li>
+                <li class="nav-item" data-target="weather-panel">
+                    <span class="nav-icon">☼</span> LIVE WEATHER
+                </li>
+                <li class="nav-item" data-target="tasks-panel">
+                    <span class="nav-icon">⎔</span> TASK MANAGER
+                </li>
             </ul>
+            <div class="sidebar-footer">SECURE DATA STREAM // ONLINE</div>
         </nav>
 
         <div class="main-content">
             <header class="top-bar">
-                <div id="greeting">Welcome Back</div>
-                <div id="clock">00:00:00</div>
+                <div class="system-status">
+                    <span class="status-node pulse-green"></span>
+                    <div id="greeting">SYSTEMS ONLINE // ADMIN</div>
+                </div>
+                <div class="clock-container">
+                    <span class="terminal-prefix">TIME::</span>
+                    <div id="clock">00:00:00</div>
+                </div>
             </header>
 
             <div class="panel-container">
                 
                 <section id="overview-panel" class="dashboard-panel active">
-                    <h2>System Overview</h2>
+                    <h2 class="panel-title">// SYSTEM OVERVIEW MATRIX</h2>
                     <div class="analytics-grid">
                         <div class="stat-card">
-                            <h3>Total Tasks</h3>
+                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                            <div class="card-label">TOTAL OPERATIONAL TASKS</div>
                             <p id="stat-total-tasks">0</p>
+                            <div class="card-graph-mock">|||||||||||||||||||||||||||||</div>
                         </div>
                         <div class="stat-card">
-                            <h3>Completed Tasks</h3>
+                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                            <div class="card-label">COMPLETED OPERATIONS</div>
                             <p id="stat-completed-tasks">0</p>
+                            <div class="card-graph-mock">|||||||||||||||||||||||||||||</div>
                         </div>
                         <div class="stat-card">
-                            <h3>Current Temp</h3>
+                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                            <div class="card-label">ATMOSPHERIC METRIC</div>
                             <p id="stat-temp">--°C</p>
+                            <div class="card-graph-mock">|||||||||||||||||||||||||||||</div>
                         </div>
                     </div>
                 </section>
 
                 <section id="weather-panel" class="dashboard-panel">
-                    <h2>Live Weather Syncing</h2>
-                    <div class="weather-detailed-card">
+                    <h2 class="panel-title">// ATMOSPHERIC TELEMETRY STREAM</h2>
+                    <div class="weather-detailed-card cyber-card">
+                        <div class="card-corner tl"></div><div class="card-corner tr"></div>
                         <div id="weather-display">
-                            <p>Initializing live updates...</p>
+                            <p class="analyzing-text">INITIALIZING GLOBAL TELEMETRY UPDATES...</p>
                         </div>
                         <div class="sync-status">
                             <span class="pulse-indicator"></span> 
-                            <span id="sync-time">Last updated: Never</span>
+                            <span id="sync-time">LAST COMPILATION: NEVER</span>
                         </div>
                     </div>
                 </section>
 
                 <section id="tasks-panel" class="dashboard-panel">
-                    <h2>Task Operations</h2>
-                    <form id="todo-form">
-                        <input type="text" id="todo-input" placeholder="Assign new operational task..." required>
-                        <button type="submit">Deploy</button>
-                    </form>
-                    <ul id="todo-list"></ul>
+                    <h2 class="panel-title">// TACTICAL OPERATIONS CONTROLLER</h2>
+                    <div class="cyber-card">
+                        <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                        <form id="todo-form">
+                            <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR..." required>
+                            <button type="submit" class="cyber-btn">DEPLOY</button>
+                        </form>
+                        <ul id="todo-list"></ul>
+                    </div>
                 </section>
 
             </div>
