@@ -3,159 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminOS // Tactical Interface Hub</title>
+    <title>AdminOS // Core Tactical HUD</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hud-raster-matrix"></div>
-    <div class="hud-lens-flare"></div>
-
-    <div id="hud-alert-deck"></div>
+    <div class="hud-screen-matrix"></div>
 
     <div class="admin-wrapper">
         
         <nav class="sidebar">
-            <div class="sidebar-brand">
-                AdminOS<span class="hud-flicker">_</span>
-            </div>
+            <div class="sidebar-brand">AdminOS</div>
             
             <ul class="nav-links">
                 <li class="nav-item active" data-target="overview-panel">
-                    <div class="nav-hex-casing">
-                        <div class="icon-node">⚏</div>
-                        <div class="label-node">OVERVIEW</div>
+                    <div class="nav-hex-frame">
+                        <div class="hex-icon">⚏</div>
+                        <div class="hex-text">Overview</div>
                     </div>
                 </li>
                 <li class="nav-item" data-target="weather-panel">
-                    <div class="nav-hex-casing">
-                        <div class="icon-node">☼</div>
-                        <div class="label-node">LIVE WEATHER</div>
+                    <div class="nav-hex-frame">
+                        <div class="hex-icon">☼</div>
+                        <div class="hex-text">Live Weather</div>
                     </div>
                 </li>
                 <li class="nav-item" data-target="tasks-panel">
-                    <div class="nav-hex-casing">
-                        <div class="icon-node">⎔</div>
-                        <div class="label-node">TASK MANAGER</div>
+                    <div class="nav-hex-frame">
+                        <div class="hex-icon">⎔</div>
+                        <div class="hex-text">Task Manager</div>
                     </div>
                 </li>
             </ul>
-
-            <div class="sidebar-footer-stats">SECURE STREAM // ONLINE</div>
         </nav>
 
         <div class="main-content">
             
             <header class="top-bar">
-                <div class="hud-header-tag left-tag">
-                    <span class="blinking-dot green"></span>
-                    <div id="greeting">INITIALIZING DATA FEEDS...</div>
+                <div class="top-bar-panel left-panel">
+                    <span class="pulse-node-green"></span>
+                    <div id="greeting">Systems Online // Admin</div>
                 </div>
                 
-                <div class="hud-compass-hud">
-                    <span class="compass-arrow">◀</span> CORE INTERFACE SYSTEM <span class="compass-arrow">▶</span>
-                </div>
-
-                <div class="hud-header-tag right-tag">
-                    <span class="prefix-deco">SYS_TIME //</span>
+                <div class="top-bar-panel right-panel">
+                    <div class="compass-widget">🧭</div>
                     <div id="clock">00:00:00</div>
+                    <div class="sys-power-icons">⏻ 📶 🔲 ⚙</div>
                 </div>
             </header>
 
             <div class="panel-container">
                 
-                <section id="overview-panel" class="dashboard-panel active">
-                    <div class="overview-grid-layout">
-                        
-                        <div class="hud-cyber-card cyan-neon">
-                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
-                            <div class="card-meta-label">TOTAL OPERATIONAL METRICS</div>
-                            <div class="flex-metric">
-                                <h1 id="stat-total-tasks">0</h1>
-                                <div class="css-chart-bars">
-                                    <span style="height: 40%"></span><span style="height: 85%"></span>
-                                    <span style="height: 55%"></span><span style="height: 95%"></span>
+                <div class="hud-main-split-grid">
+                    
+                    <div class="hud-column-wrapper">
+                        <section id="overview-panel" class="dashboard-panel active">
+                            <div class="cyber-window-box">
+                                <div class="window-header">
+                                    <span class="window-title">System Overview</span>
+                                    <span class="window-dots">•••</span>
+                                </div>
+                                <div class="window-content-body">
+                                    
+                                    <div class="inner-data-deck">
+                                        <div class="pure-css-bar-chart">
+                                            <span style="height: 40%"></span><span style="height: 75%"></span>
+                                            <span style="height: 55%"></span><span style="height: 90%"></span>
+                                            <span style="height: 65%"></span><span style="height: 45%"></span>
+                                        </div>
+                                        <div class="deck-metric-flex">
+                                            <div class="metric-meta-group">
+                                                <span class="icon-label">📋 Total Tasks</span>
+                                                <h2 id="stat-total-tasks">0</h2>
+                                            </div>
+                                            <div class="metric-meta-group right-align">
+                                                <span class="icon-label">❄ Current Temp</span>
+                                                <h2 class="sync-temp-field">--°C</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="inner-data-deck">
+                                        <div class="mock-line-container">
+                                            <svg viewBox="0 0 100 30" class="svg-sparkline">
+                                                <path d="M0,25 Q15,5 30,20 T60,10 T90,15 L100,15" fill="none" stroke="#00f3ff" stroke-width="1.5"/>
+                                            </svg>
+                                        </div>
+                                        <div class="deck-metric-flex">
+                                            <div class="metric-meta-group">
+                                                <span class="icon-label">☑ Completed Tasks</span>
+                                                <h2 id="stat-completed-tasks">0</h2>
+                                            </div>
+                                            <div class="metric-meta-group right-align">
+                                                <span class="icon-label">🌡 Current Temp</span>
+                                                <h2 class="sync-temp-field">--°C</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="inner-data-deck">
+                                        <div class="deck-metric-flex align-top">
+                                            <div class="nested-radar-arcs">
+                                                <div class="arc circle-1"></div>
+                                                <div class="arc circle-2"></div>
+                                            </div>
+                                            <div class="metric-meta-group">
+                                                <span class="icon-label">👥 Total Tasks</span>
+                                                <h2 class="sync-total-field">0</h2>
+                                            </div>
+                                            <div class="metric-meta-group right-align">
+                                                <span class="icon-label">⏾ Current Temp</span>
+                                                <h2 class="sync-temp-field">--°C</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="sub-stream-info">SYS_RECON // SUB_STREAM_ALPHA</div>
-                        </div>
+                        </section>
+                    </div>
 
-                        <div class="hud-cyber-card magenta-neon">
-                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
-                            <div class="card-meta-label">COMPLETED WORKFLOW SECTORS</div>
-                            <div class="flex-metric">
-                                <h1 id="stat-completed-tasks">0</h1>
-                                <div class="css-radial-ring">
-                                    <div class="pulsing-heart-node"></div>
+                    <div class="hud-column-wrapper double-deck">
+                        
+                        <section id="weather-panel" class="dashboard-panel active">
+                            <div class="cyber-window-box">
+                                <div class="window-header">
+                                    <span class="window-title">Live Weather Syncing</span>
+                                    <span class="window-dots">•••</span>
+                                </div>
+                                <div class="window-content-body split-weather-layout">
+                                    <div class="weather-log-submodule">
+                                        <div id="weather-display">
+                                            <p class="system-stream-text">Awaiting sensor data link...</p>
+                                        </div>
+                                        <div class="sync-footer">
+                                            <span class="pulse-node"></span>
+                                            <span id="sync-time">Last updated: Never</span>
+                                        </div>
+                                    </div>
+                                    <div class="satellite-globe-submodule">
+                                        <div class="globe-viewport">
+                                            <div class="globe-mesh-lines"></div>
+                                            <div class="radar-ping-sweep"></div>
+                                        </div>
+                                        <div class="sync-ring-wrapper">
+                                            <div class="sync-ring-active">Live Sync Active</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="sub-stream-info">LOGISTICS_DB // STATUS_VERIFIED</div>
-                        </div>
+                        </section>
 
-                        <div class="hud-cyber-card green-neon">
-                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
-                            <div class="card-meta-label">CORE TELEMETRY THERMALS</div>
-                            <div class="flex-metric">
-                                <h1 id="stat-temp">--°C</h1>
-                                <canvas id="realtime-line-graph" width="100" height="45"></canvas>
-                            </div>
-                            <div class="sub-stream-info">ENVIRONMENTAL // THERMAL_LINK</div>
-                        </div>
-
-                    </div>
-                </section>
-
-                <section id="weather-panel" class="dashboard-panel">
-                    <div class="weather-split-deck">
-                        
-                        <div class="hud-cyber-card telemetry-block">
-                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
-                            <div class="card-meta-label">ATMOSPHERIC RECON READOUT</div>
-                            <div id="weather-display">
-                                <p class="booting-log">> LINKING GEOLOCATION SENSOR ARRAYS...</p>
-                            </div>
-                            <div class="sync-footer-time">
-                                <span class="sync-pulse-dot"></span>
-                                <span id="sync-time">LAST COMPILATION: STANDBY</span>
-                            </div>
-                        </div>
-
-                        <div class="hud-cyber-card hologram-visualization">
-                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
-                            <div class="card-meta-label">VISUAL SCANNING SURFACE PLANE</div>
-                            <div class="hologram-viewport">
-                                <svg class="svg-telemetry-rings" viewBox="0 0 200 200">
-                                    <circle class="ring-wire-outer" cx="100" cy="100" r="85" />
-                                    <circle class="ring-wire-dashed" cx="100" cy="100" r="72" stroke-dasharray="14 10" />
-                                    <circle class="ring-wire-dotted" cx="100" cy="100" r="58" stroke-dasharray="3 5" />
-                                </svg>
-                                
-                                <div class="cyber-globe-mesh">
-                                    <div class="globe-longitude-stripes"></div>
+                        <section id="tasks-panel" class="dashboard-panel active">
+                            <div class="cyber-window-box">
+                                <div class="window-header">
+                                    <span class="window-title">Task Operations</span>
+                                    <span class="window-dots">•••</span>
                                 </div>
-                                <div class="laser-radar-sweep-line"></div>
+                                <div class="window-content-body operational-flex-layout">
+                                    <form id="todo-form" class="hud-integrated-form">
+                                        <div class="input-row">
+                                            <label>Title</label>
+                                            <div class="input-frame-box">Task Operation</div>
+                                        </div>
+                                        <div class="input-row">
+                                            <label>Input</label>
+                                            <input type="text" id="todo-input" placeholder="Enter your request input..." required autocomplete="off">
+                                        </div>
+                                        <div class="input-row">
+                                            <label>Description</label>
+                                            <div class="input-frame-box dim-text">Description / Description</div>
+                                        </div>
+                                        <button type="submit" class="hud-action-btn">Deploy</button>
+                                    </form>
+                                    <div class="hud-checklist-stream">
+                                        <ul id="todo-list"></ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="hologram-footer-tag">LIVE HUD NAVIGATION LINK ACTIVE</div>
-                        </div>
+                        </section>
 
                     </div>
-                </section>
 
-                <section id="tasks-panel" class="dashboard-panel">
-                    <div class="hud-cyber-card operations-terminal-box">
-                        <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
-                        <div class="card-meta-label">TACTICAL WORKFLOW CAPTURE CONTROLLER</div>
-                        
-                        <form id="todo-form">
-                            <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR CORRIDOR..." required autocomplete="off">
-                            <button type="submit" class="hud-terminal-deploy-btn">DEPLOY_</button>
-                        </form>
-                        
-                        <ul id="todo-list"></ul>
-                    </div>
-                </section>
+                </div>
 
             </div>
         </div>

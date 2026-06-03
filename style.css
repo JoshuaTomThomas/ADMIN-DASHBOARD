@@ -1,179 +1,195 @@
 :root {
-    --bg-void-black: #030612;
-    --bg-sidebar-dark: #070c20;
+    --bg-deep-void: #060b16;
+    --bg-window-card: rgba(10, 23, 49, 0.45);
     --neon-cyan: #00f3ff;
     --neon-pink: #ff0055;
     --neon-green: #00ff66;
-    --panel-glass-tint: rgba(10, 19, 44, 0.65);
-    --cyan-neon-glow: 0 0 15px rgba(0, 243, 255, 0.35);
-    --pink-neon-glow: 0 0 15px rgba(255, 0, 85, 0.35);
-    --font-sci-fi: 'Orbitron', sans-serif;
-    --font-telemetry: 'Share Tech Mono', monospace;
+    --border-cyan-dim: rgba(0, 243, 255, 0.25);
+    --text-primary-bright: #ffffff;
+    --text-secondary-dim: #708cb2;
+    --font-display: 'Orbitron', sans-serif;
+    --font-data-log: 'Rajdhani', sans-serif;
 }
 
+/* Base Terminal Setup */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--bg-void-black); color: #ffffff; font-family: var(--font-telemetry); height: 100vh; overflow: hidden; }
+body {
+    background-color: var(--bg-deep-void);
+    color: var(--text-primary-bright);
+    font-family: var(--font-data-log);
+    letter-spacing: 0.5px;
+    height: 100vh;
+    overflow: hidden;
+}
 
-/* 1. INTERFACE DISPLAY FILTERS */
-.hud-raster-matrix {
+/* CRT Screen Vector Overlay */
+.hud-screen-matrix {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 243, 255, 0.02) 50%);
     background-size: 100% 4px; pointer-events: none; z-index: 9999;
 }
-.hud-lens-flare {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: radial-gradient(circle at 50% 35%, rgba(12, 26, 72, 0.5) 0%, transparent 85%);
-    pointer-events: none; z-index: 0;
-}
+
 .admin-wrapper { display: flex; height: 100vh; position: relative; z-index: 2; }
 
-/* 2. THE ADVANCED TERMINAL SIDEBAR */
+/* Left Hand Command Navigation Column */
 .sidebar {
-    width: 280px; background-color: var(--bg-sidebar-dark);
-    border-right: 1px solid rgba(0, 243, 255, 0.3); padding: 40px 18px; display: flex; flex-direction: column;
+    width: 260px; background-color: #040812;
+    border-right: 1px solid rgba(0, 243, 255, 0.2);
+    padding: 40px 15px; display: flex; flex-direction: column; gap: 40px;
 }
 .sidebar-brand {
-    font-family: var(--font-sci-fi); font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;
-    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); text-align: center; margin-bottom: 45px;
+    font-family: var(--font-display); font-weight: 900; font-size: 1.6rem;
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); text-align: center;
 }
 .nav-links { list-style: none; }
 .nav-item {
-    margin-bottom: 16px; cursor: pointer; transition: all 0.3s cubic-bezier(0.1, 0.8, 0.2, 1);
-    clip-path: polygon(0 0, 88% 0, 100% 32%, 100% 100%, 0 100%);
-    border: 1px solid rgba(0, 243, 255, 0.15); background: rgba(5, 9, 24, 0.6);
+    margin-bottom: 20px; cursor: pointer; transition: all 0.25s ease;
+    border: 1px solid var(--border-cyan-dim); background: rgba(5, 11, 27, 0.5);
+    border-radius: 8px; box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.05);
 }
-.nav-hex-casing { padding: 18px 22px; display: flex; align-items: center; gap: 16px; }
-.icon-node { color: var(--neon-cyan); opacity: 0.7; }
-.label-node { font-family: var(--font-sci-fi); font-size: 0.8rem; color: #768fb3; }
+.nav-hex-frame { padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.hex-icon { font-size: 1.5rem; color: var(--neon-cyan); filter: drop-shadow(0 0 5px var(--neon-cyan)); }
+.hex-text { font-family: var(--font-display); font-size: 0.75rem; color: var(--text-secondary-dim); font-weight: bold; }
 
-.nav-item:hover, .nav-item.active { background: rgba(0, 243, 255, 0.08); border-color: var(--neon-cyan); box-shadow: var(--cyan-neon-glow); }
-.nav-item.active .label-node { color: var(--neon-cyan); font-weight: bold; text-shadow: 0 0 8px rgba(0, 243, 255, 0.6); }
-.sidebar-footer-stats { margin-top: auto; font-family: var(--font-sci-fi); font-size: 0.7rem; color: #405777; text-align: center; }
-
-/* 3. CENTER TOP HEADER WORKSPACE */
-.main-content { flex: 1; display: flex; flex-direction: column; }
-.top-bar {
-    padding: 22px 40px; display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 1px solid rgba(0, 243, 255, 0.25); background: rgba(3, 5, 15, 0.85);
+.nav-item:hover, .nav-item.active {
+    background: rgba(0, 243, 255, 0.1); border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2), inset 0 0 15px rgba(0, 243, 255, 0.1);
 }
-.hud-header-tag {
-    border: 1px solid rgba(0, 243, 255, 0.25); padding: 10px 24px; background: rgba(4, 8, 22, 0.85);
-    display: flex; align-items: center; gap: 12px; font-family: var(--font-sci-fi); font-size: 0.8rem; color: var(--neon-cyan);
+.nav-item.active .hex-text { color: #ffffff; text-shadow: 0 0 8px var(--neon-cyan); }
+
+/* Main Dynamic Panel Layout Canvas */
+.main-content { flex: 1; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 30%, #0d1a3a 0%, var(--bg-deep-void) 70%); }
+.top-bar { padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 243, 255, 0.15); background: rgba(4, 8, 18, 0.8); }
+.top-bar-panel { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 0.85rem; color: var(--neon-cyan); }
+.pulse-node-green { width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); }
+#clock { font-size: 1.4rem; font-weight: bold; color: #ffffff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.4); }
+.sys-power-icons { display: flex; gap: 15px; color: var(--text-secondary-dim); font-size: 0.95rem; cursor: pointer; }
+
+/* Multi-Panel Dashboard Split Architecture */
+.panel-container { padding: 25px; flex: 1; overflow-y: auto; }
+.dashboard-panel { display: block; height: 100%; } /* Keeping all visible but structured as a grid setup to match image exactly */
+
+.hud-main-split-grid {
+    display: grid; grid-template-columns: 4.5fr 5.5fr; gap: 25px; height: 100%;
 }
-.left-tag { clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%); }
-.right-tag { clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%); }
-.blinking-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
-.hud-compass-hud { font-family: var(--font-sci-fi); font-size: 0.8rem; color: rgba(255,255,255,0.25); letter-spacing: 2px; }
-.prefix-deco { color: var(--neon-pink); }
-#clock { font-size: 1.3rem; font-weight: 700; color: #ffffff; }
+.hud-column-wrapper { display: flex; flex-direction: column; gap: 25px; }
+.hud-column-wrapper.double-deck { display: grid; grid-template-rows: 1.1fr 0.9fr; gap: 25px; }
 
-/* 4. MODULAR COGNITIVE WORKSPACE GRIDS */
-.panel-container { padding: 40px; flex: 1; overflow-y: auto; }
-.dashboard-panel { display: none; }
-.dashboard-panel.active { display: block; animation: monitorFadeIn 0.4s ease-out; }
-
-.overview-grid-layout, .weather-split-deck {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
+/* The Layered Cyber Window Blocks */
+.cyber-window-box {
+    background: var(--bg-window-card); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4), inset 0 0 20px rgba(0, 243, 255, 0.05);
+    display: flex; flex-direction: column; height: 100%; overflow: hidden; position: relative;
 }
-.hud-cyber-card {
-    background: var(--panel-glass-tint); border: 1px solid rgba(0, 243, 255, 0.2);
-    padding: 25px; position: relative; clip-path: polygon(0 0, 93% 0, 100% 9%, 100% 100%, 0 100%);
-    box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.04);
+.cyber-window-box::before {
+    content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%;
+    border: 1px solid rgba(255,255,255,0.05); border-radius: 11px; pointer-events: none;
 }
-
-/* Geometric Bounding Accents */
-.corner-bracket { position: absolute; width: 12px; height: 12px; border: 2px solid var(--neon-cyan); }
-.corner-bracket.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-.corner-bracket.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
-
-.card-meta-label { font-family: var(--font-sci-fi); font-size: 0.75rem; color: #4e678a; }
-.flex-metric { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
-.hud-cyber-card h1 { font-family: var(--font-sci-fi); font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
-.sub-stream-info { font-family: var(--font-sci-fi); font-size: 0.6rem; color: rgba(0, 243, 255, 0.35); overflow: hidden; white-space: nowrap; }
-
-/* 5. DIAGNOSTIC DATA COMPONENTS (BARS & WAVE OSCILLATORS) */
-.css-chart-bars { display: flex; align-items: flex-end; gap: 4px; height: 38px; width: 60px; }
-.css-chart-bars span { flex: 1; background: var(--neon-cyan); box-shadow: var(--cyan-neon-glow); }
-.magenta-neon .css-chart-bars span { background: var(--neon-pink); box-shadow: var(--pink-neon-glow); }
-
-.css-radial-ring {
-    width: 42px; height: 42px; border-radius: 50%; border: 2px dashed var(--neon-pink);
-    display: flex; align-items: center; justify-content: center; animation: spinLoop 15s linear infinite;
+.window-header {
+    background: rgba(4, 9, 22, 0.6); padding: 12px 20px; border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+    display: flex; justify-content: space-between; align-items: center;
 }
-.pulsing-heart-node { width: 14px; height: 14px; border-radius: 50%; background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+.window-title { font-family: var(--font-display); font-size: 0.85rem; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+.window-dots { color: var(--text-secondary-dim); font-size: 0.8rem; letter-spacing: 1px; }
+.window-content-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 15px; justify-content: space-between; }
 
-/* 6. HOLOGRAPHIC PLANETARY RADAR DECK */
-.hologram-viewport {
-    position: relative; height: 210px; display: flex; align-items: center; justify-content: center;
-    background: radial-gradient(circle, rgba(0, 243, 255, 0.08) 0%, transparent 70%); margin-top: 15px;
+/* Internal Sub-Card Data Components */
+.inner-data-deck {
+    background: rgba(4, 9, 22, 0.4); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 6px;
+    padding: 15px 20px; position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 105px;
 }
-.svg-telemetry-rings { position: absolute; width: 200px; height: 200px; }
-.svg-telemetry-rings circle { fill: none; transform-origin: center; }
-.ring-wire-outer { stroke: rgba(0, 243, 255, 0.15); stroke-width: 1px; }
-.ring-wire-dashed { stroke: var(--neon-cyan); stroke-width: 1px; animation: spinLoop 24s linear infinite; }
-.ring-wire-dotted { stroke: var(--neon-pink); stroke-width: 1.5px; animation: spinLoop 12s linear infinite reverse; }
+.deck-metric-flex { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; }
+.deck-metric-flex.align-top { align-items: flex-start; }
+.metric-meta-group { display: flex; flex-direction: column; gap: 4px; }
+.metric-meta-group.right-align { align-items: flex-end; }
+.icon-label { font-size: 0.75rem; color: var(--text-secondary-dim); font-weight: 500; }
+.inner-data-deck h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: bold; color: #ffffff; }
 
-.cyber-globe-mesh {
-    width: 105px; height: 105px; border-radius: 50%; border: 1px dashed rgba(0, 243, 255, 0.4);
-    box-shadow: inset 0 0 25px rgba(0, 243, 255, 0.25); position: relative; overflow: hidden;
-    }
-.globe-longitude-stripes {
+/* Pure CSS Micro Graphic Modules */
+.pure-css-bar-chart { position: absolute; right: 20px; top: 15px; display: flex; align-items: flex-end; gap: 3px; height: 32px; }
+.pure-css-bar-chart span { width: 4px; background: var(--neon-cyan); box-shadow: 0 0 6px var(--neon-cyan); border-radius: 1px; }
+
+.mock-line-container { position: absolute; right: 20px; top: 15px; width: 70px; height: 30px; }
+.svg-sparkline { width: 100%; height: 100%; filter: drop-shadow(0 0 4px var(--neon-cyan)); }
+
+.nested-radar-arcs { position: absolute; right: 20px; top: 15px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.arc { position: absolute; border-radius: 50%; border: 2px solid transparent; }
+.arc.circle-1 { width: 35px; height: 35px; border-top-color: var(--neon-cyan); border-bottom-color: var(--neon-cyan); animation: spinRing 8s linear infinite; }
+.arc.circle-2 { width: 20px; height: 20px; border-left-color: var(--neon-pink); border-right-color: var(--neon-pink); animation: spinRing 4s linear infinite reverse; }
+
+/* Weather Control Deck Split Layout */
+.split-weather-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.weather-log-submodule { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+#weather-display h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--neon-cyan); margin-bottom: 5px; }
+#weather-display h1 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; color: #ffffff; margin: 5px 0; }
+.sync-footer { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-secondary-dim); }
+.pulse-node { width: 6px; height: 6px; background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 6px var(--neon-green); }
+
+/* Holographic Rotating Planet Module Structure */
+.satellite-globe-submodule { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+.globe-viewport {
+    width: 110px; height: 110px; border-radius: 50%; border: 1px dashed rgba(0, 243, 255, 0.4);
+    box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.2), 0 0 15px rgba(0, 243, 255, 0.1);
+    position: relative; overflow: hidden; background: radial-gradient(circle, rgba(13,26,58,0.8) 0%, rgba(4,8,18,0.9) 70%);
+}
+.globe-mesh-lines {
     position: absolute; width: 200%; height: 100%;
-    background-image: linear-gradient(90deg, transparent 49%, rgba(0, 243, 255, 0.2) 50%, transparent 51%);
-    background-size: 16px 100%; animation: globeRoll 4s linear infinite;
+    background-image: linear-gradient(90deg, transparent 49%, rgba(0, 243, 255, 0.15) 50%, transparent 51%);
+    background-size: 14px 100%; animation: orbitMesh 4s linear infinite;
 }
-.laser-radar-sweep-line {
-    position: absolute; left: 15%; width: 70%; height: 2px; background: var(--neon-cyan);
-    box-shadow: 0 0 12px var(--neon-cyan); animation: sweepGrid 2.5s ease-in-out infinite;
+.radar-ping-sweep {
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+    background: linear-gradient(0deg, rgba(0, 243, 255, 0.15) 0%, transparent 50%);
+    animation: radarSweep 2.5s ease-in-out infinite; transform-origin: bottom center;
 }
-.hologram-footer-tag { margin-top: 15px; font-family: var(--font-sci-fi); font-size: 0.75rem; color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); text-align: center; }
+.sync-ring-wrapper { margin-top: 12px; }
+.sync-ring-active { font-family: var(--font-display); font-size: 0.7rem; color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); border: 1px solid var(--border-cyan-dim); padding: 3px 10px; border-radius: 20px; background: rgba(0, 243, 255, 0.05); }
 
-/* 7. TRANSACTION DISPATCH OPERATIONS PANELS */
-#todo-form { display: flex; gap: 15px; margin: 20px 0; }
-#todo-input {
-    flex: 1; background: rgba(3, 5, 14, 0.9); border: 1px solid rgba(0, 243, 255, 0.35);
-    padding: 15px 20px; font-family: var(--font-telemetry); font-size: 1rem; color: #ffffff; outline: none;
+/* Operational Deployment Input Layout Panel Form */
+.operational-flex-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hud-integrated-form { display: flex; flex-direction: column; gap: 10px; }
+.input-row { display: flex; flex-direction: column; gap: 4px; }
+.input-row label { font-family: var(--font-display); font-size: 0.7rem; color: var(--text-secondary-dim); font-weight: bold; }
+.input-frame-box, #todo-form input {
+    background: rgba(3, 7, 18, 0.7); border: 1px solid rgba(0, 243, 255, 0.2); border-radius: 6px;
+    padding: 10px 14px; font-family: var(--font-data-log); font-size: 0.95rem; color: #ffffff; outline: none;
 }
-#todo-input:focus { border-color: var(--neon-cyan); box-shadow: var(--cyan-neon-glow); }
+#todo-form input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.15); }
+.dim-text { color: #4b6380 !important; }
 
-.hud-terminal-deploy-btn {
-    background: transparent; border: 1px solid var(--neon-pink); color: #ffffff;
-    font-family: var(--font-sci-fi); font-weight: bold; padding: 0 35px; cursor: pointer;
-    transition: all 0.3s; clip-path: polygon(0 0, 85% 0, 100% 35%, 100% 100%, 0 100%);
+.hud-action-btn {
+    background: transparent; border: 1px solid var(--neon-cyan); color: #ffffff;
+    font-family: var(--font-display); font-weight: bold; font-size: 0.8rem; padding: 10px;
+    border-radius: 6px; cursor: pointer; transition: all 0.25s; margin-top: 5px;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
 }
-.hud-terminal-deploy-btn:hover { background: var(--neon-pink); box-shadow: var(--pink-neon-glow); }
+.hud-action-btn:hover { background: var(--neon-cyan); color: #000000; box-shadow: 0 0 15px var(--neon-cyan); font-weight: 900; }
 
+/* Interactive Task Checkbox Element Layout Output */
+.hud-checklist-stream { overflow-y: auto; max-height: 190px; padding-right: 5px; }
 #todo-list { list-style: none; }
 #todo-list li {
-    background: rgba(3, 5, 14, 0.55); border-left: 3px solid var(--neon-cyan);
-    padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(4, 9, 22, 0.5); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 6px;
+    padding: 10px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.9rem; font-family: var(--font-display); animation: entryNode 0.3s ease;
 }
+#todo-list li span { cursor: pointer; flex: 1; display: flex; align-items: center; gap: 10px; }
+
+/* Custom Futuristic Checkbox Styling to match image toggles */
+#todo-list li span::before {
+    content: '🔳'; font-size: 0.8rem; color: var(--neon-cyan);
+}
+.completed-task { opacity: 0.4; color: var(--text-secondary-dim) !important; }
+.completed-task span::before { content: '☑️' !important; }
+
 #todo-list li button {
-    background: transparent; border: 1px solid rgba(255, 0, 85, 0.5); color: var(--neon-pink);
-    padding: 5px 14px; cursor: pointer; font-family: var(--font-sci-fi); font-size: 0.65rem;
+    background: transparent; border: 1px solid rgba(255, 0, 85, 0.4); color: var(--neon-pink);
+    padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--font-data-log); font-size: 0.75rem;
 }
-#todo-list li button:hover { background: var(--neon-pink); color: #fff; box-shadow: var(--pink-neon-glow); }
-.completed-task { opacity: 0.35; text-decoration: line-through; color: #4e678a !important; }
+#todo-list li button:hover { background: var(--neon-pink); color: #ffffff; box-shadow: 0 0 8px var(--neon-pink); }
 
-/* 8. SYSTEM ALARM TOAST ALERTS DECK */
-#hud-alert-deck { position: fixed; bottom: 35px; right: 35px; display: flex; flex-direction: column; gap: 12px; z-index: 10000; }
-.hud-alert-capsule {
-    background: rgba(255, 0, 85, 0.16); border: 1px solid var(--neon-pink); color: #fff; padding: 16px 25px;
-    font-family: var(--font-telemetry); font-size: 0.9rem; box-shadow: var(--pink-neon-glow);
-    animation: alertSlideIn 0.35s cubic-bezier(0.1, 0.8, 0.2, 1); clip-path: polygon(0 0, 92% 0, 100% 35%, 100% 100%, 0 100%);
-}
-.hud-alert-capsule.success { background: rgba(0, 255, 102, 0.16); border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0,255,102,0.25); }
-
-/* Weather Text Styling Handles */
-#weather-display h3 { font-family: var(--font-sci-fi); font-size: 1.3rem; margin-bottom: 6px; color: var(--neon-cyan); }
-.sync-footer-time { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 0.85rem; color: #4e678a; }
-.sync-pulse-dot { width: 6px; height: 6px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); }
-
-/* FX ANIMATION TIMELINES */
-@keyframes monitorFadeIn { 0% { opacity: 0; transform: scale(0.99) translateY(4px); filter: brightness(2.5); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1); } }
-@keyframes spinLoop { 100% { transform: rotate(360deg); } }
-@keyframes globeRoll { 0% { background-position-x: 0px; } 100% { background-position-x: 32px; } }
-@keyframes sweepGrid { 0%, 100% { top: 15%; opacity: 0.3; } 50% { top: 85%; opacity: 1; } }
-@keyframes alertSlideIn { from { transform: translateX(100%) scale(0.9); opacity: 0; } to { transform: translateX(0) scale(1); opacity: 1; } }
-@keyframes flick { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-.hud-flicker { animation: flick 1.2s infinite; color: var(--neon-pink); }
+/* Core System Animation Timelines */
+@keyframes spinRing { 100% { transform: rotate(360deg); } }
+@keyframes orbitMesh { 0% { background-position-x: 0px; } 100% { background-position-x: 28px; } }
+@keyframes radarSweep { 0% { transform: scaleY(0); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+@keyframes entryNode { from { opacity:0; transform: translateY(5px); } to { opacity:1; transform: translateY(0); } }

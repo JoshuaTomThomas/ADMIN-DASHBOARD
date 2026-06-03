@@ -1,4 +1,4 @@
-// DOM Element Handles
+// --- DOM COMPONENT REGISTRY ---
 const clockEl = document.getElementById('clock');
 const greetingEl = document.getElementById('greeting');
 const todoForm = document.getElementById('todo-form');
@@ -7,106 +7,44 @@ const todoList = document.getElementById('todo-list');
 const weatherDisplay = document.getElementById('weather-display');
 const syncTimeEl = document.getElementById('sync-time');
 
-// KPI Counters Selectors
+// KPI Counters Targets
 const statTotalTasks = document.getElementById('stat-total-tasks');
 const statCompletedTasks = document.getElementById('stat-completed-tasks');
-const statTemp = document.getElementById('stat-temp');
 
 let API_KEY = '';
 
-// --- 1. SYSTEM HOLOGRAPHIC NOTIFICATION ROUTINE ---
-function deployHudAlert(message, alertType = 'error') {
-    const alertDeck = document.getElementById('hud-alert-deck');
-    const alertBox = document.createElement('div');
-    alertBox.className = `hud-alert-capsule ${alertType}`;
-    alertBox.innerText = `> ${message}`;
-    
-    alertDeck.appendChild(alertBox);
-
-    setTimeout(() => {
-        alertBox.style.opacity = '0';
-        alertBox.style.transform = 'translateY(12px)';
-        alertBox.style.transition = 'all 0.4s cubic-bezier(0.1, 0.8, 0.2, 1)';
-        setTimeout(() => alertBox.remove(), 400);
-    }, 4000);
-}
-
-// --- 2. MULTI-PANEL VIEWPORT ROUTER ---
-const navItems = document.querySelectorAll('.nav-item');
-const panels = document.querySelectorAll('.dashboard-panel');
-
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navItems.forEach(nav => nav.classList.remove('active'));
-        panels.forEach(panel => panel.classList.remove('active'));
-
-        item.classList.add('active');
-        const targetPanel = item.getAttribute('data-target');
-        document.getElementById(targetPanel).classList.add('active');
-        
-        deployHudAlert(`ROUTING STREAM TO COMPONENT: ${targetPanel.toUpperCase()}`, 'success');
-    });
-});
-
-// --- 3. CANVAS REALTIME GRAPH MATRIX (Pure Canvas Drawing) ---
-function initCanvasWaveOscillator() {
-    const canvas = document.getElementById('realtime-line-graph');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let points = Array(20).fill(22);
-
-    setInterval(() => {
-        // Shift metrics leftward and append new random sensor inputs
-        points.shift();
-        points.push(Math.floor(Math.random() * 35) + 5);
-
-        // Wipe current canvas frame clean
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw HUD Neon Wave Outline
-        ctx.beginPath();
-        ctx.strokeStyle = '#00ff66';
-        ctx.lineWidth = 2;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#00ff66';
-
-        points.forEach((y, x) => {
-            const posX = x * (canvas.width / (points.length - 1));
-            if (x === 0) ctx.moveTo(posX, y);
-            else ctx.lineTo(posX, y);
-        });
-
-        ctx.stroke();
-        ctx.shadowBlur = 0; // Reset shading engine
-    }, 200);
-}
-
-// --- SYSTEM CHRONOMETER TRACKING ---
-function processSystemClock() {
+// --- CHRONOMETER TERMINAL TIMER ---
+function executeSystemClock() {
     const now = new Date();
     clockEl.innerText = now.toLocaleTimeString();
     
     const hours = now.getHours();
-    if (hours < 12) greetingEl.innerText = "SYSTEMS OPERATIONAL // GOOD MORNING, ADMIN";
-    else if (hours < 18) greetingEl.innerText = "SYSTEMS OPERATIONAL // GOOD AFTERNOON, ADMIN";
-    else greetingEl.innerText = "SYSTEMS OPERATIONAL // GOOD EVENING, ADMIN";
+    if (hours < 12) greetingEl.innerText = "Systems Online // Admin";
+    else if (hours < 18) greetingEl.innerText = "Systems Online // Admin";
+    else greetingEl.innerText = "Systems Online // Admin";
 }
-setInterval(processSystemClock, 1000);
-processSystemClock();
+setInterval(executeSystemClock, 1000);
+executeSystemClock();
 
-// --- OPERATIONAL COMPONENT STATE CONTROL ---
-let tasks = JSON.parse(localStorage.getItem('terminal_tasks')) || [];
+// --- STATE INTEGRITY OPERATIONS ---
+let tasks = JSON.parse(localStorage.getItem('hud_matrix_tasks')) || [];
 
-function calculateMetrics() {
+function synchroniseGlobalMetrics() {
     const total = tasks.length;
     const completed = tasks.filter(t => t.completed).length;
     
+    // Push updates to primary tracking labels
     statTotalTasks.innerText = total;
     statCompletedTasks.innerText = completed;
+
+    // Synchronize cross-widget values seamlessly
+    document.querySelectorAll('.sync-total-field').forEach(field => {
+        field.innerText = total;
+    });
 }
 
 function saveAndRenderTasks() {
-    localStorage.setItem('terminal_tasks', JSON.stringify(tasks));
+    localStorage.setItem('hud_matrix_tasks', JSON.stringify(tasks));
     todoList.innerHTML = '';
     
     tasks.forEach((task, index) => {
@@ -114,14 +52,14 @@ function saveAndRenderTasks() {
         const completedClass = task.completed ? 'class="completed-task"' : '';
         
         li.innerHTML = `
-            <span ${completedClass} onclick="toggleTask(${index})" style="cursor: pointer; flex: 1;">
+            <span ${completedClass} onclick="toggleTask(${index})">
                 ${task.text}
             </span>
-            <button onclick="deleteTask(${index})">PURGE_</button>
+            <button onclick="deleteTask(${index})">✕</button>
         `;
         todoList.appendChild(li);
     });
-    calculateMetrics();
+    synchroniseGlobalMetrics();
 }
 
 todoForm.addEventListener('submit', (e) => {
@@ -131,84 +69,80 @@ todoForm.addEventListener('submit', (e) => {
         tasks.push({ text: taskText, completed: false });
         todoInput.value = '';
         saveAndRenderTasks();
-        deployHudAlert("NEW OPERATIONAL MATRIX VECTOR DEPLOYED", "success");
-    } else {
-        deployHudAlert("INPUT EMPTY // DISPATCH ABORTED");
     }
 });
 
 window.toggleTask = function(index) {
     tasks[index].completed = !tasks[index].completed;
     saveAndRenderTasks();
-    deployHudAlert(`VECTOR MATRIX OVERRIDE COMPLETED AT NODE [${index}]`, "success");
 };
 
 window.deleteTask = function(index) {
     tasks.splice(index, 1);
     saveAndRenderTasks();
-    deployHudAlert(`OPERATIONAL VECTOR RECORD PURGED FROM MAIN LOGS: [${index}]`);
 };
 
-// --- AUTOMATED SENSOR WEATHER FEEDS ---
-function fetchLocationTelemetry() {
+// --- GEOLOCATION SENSOR UPDATER ARRAYS ---
+function requestDeviceCoordinates() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
     });
 }
 
-async function fetchAtmosphericSensorStream() {
+async function runAtmosphericFeedsEngine() {
     if (!API_KEY) return;
 
     try {
-        const coords = await fetchLocationTelemetry();
-        const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${coords.coords.latitude}&lon=${coords.coords.longitude}&appid=${API_KEY}&units=metric`
+        const positioning = await requestDeviceCoordinates();
+        const payload = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${positioning.coords.latitude}&lon=${positioning.coords.longitude}&appid=${API_KEY}&units=metric`
         );
-        if (!res.ok) throw new Error("Telemetry broadcast broken");
-        const data = await res.json();
+        if (!payload.ok) throw new Error("Broadcast line broke");
+        const data = await payload.json();
 
-        // Update atmospheric readout components
+        // Render data inside HUD telemetry boxes
         weatherDisplay.innerHTML = `
-            <h3>${data.name.toUpperCase()} DATA RECON TERMINAL</h3>
-            <h1 style="font-size: 2.8rem; margin: 12px 0; color: #00f3ff; font-family: 'Orbitron';">${Math.round(data.main.temp)}°C</h1>
-            <p style="text-transform: uppercase; font-size: 0.95rem;">METRIC CONDITION // ${data.weather[0].description}</p>
-            <p style="color: #4e678a; font-size: 0.9rem; margin-top: 6px;">HUMIDITY LAYER: ${data.main.humidity}% | WIND SPEED: ${data.wind.speed} M/S</p>
+            <h3>${data.name.toUpperCase()}</h3>
+            <h1>${Math.round(data.main.temp)}°C</h1>
+            <p style="text-transform: uppercase; font-size: 0.8rem; color: #708cb2;">Metrics: ${data.weather[0].description}</p>
+            <p style="font-size: 0.75rem; color: #4b6380; margin-top: 2px;">Humidity: ${data.main.humidity}% | Wind: ${data.wind.speed} m/s</p>
         `;
 
-        statTemp.innerText = `${Math.round(data.main.temp)}°C`;
-        const timestamp = new Date();
-        syncTimeEl.innerText = `LAST COMPILATION: ${timestamp.toLocaleTimeString()}`;
-        deployHudAlert("ATMOSPHERIC DATA RECON METRICS LINK SYNCHRONIZED", "success");
+        // Update temperature metrics across different dashboard segments
+        document.querySelectorAll('.sync-temp-field').forEach(field => {
+            field.innerText = `${Math.round(data.main.temp)}°C`;
+        });
+
+        const now = new Date();
+        syncTimeEl.innerText = `Last updated: ${now.toLocaleTimeString()}`;
 
     } catch (err) {
-        weatherDisplay.innerHTML = `<p style="color: #ff0055;">CRITICAL ATMOSPHERIC FEED SYNC FAILURE.</p>`;
-        deployHudAlert("CORE TRANSCEIVER SENSOR SYNC FAULT DETECTED");
+        weatherDisplay.innerHTML = `<p style="color: #ff0055; font-size:0.85rem;">Feeds sync fault.</p>`;
         console.error(err);
     }
 }
 
-// Config Dynamic Initializers Execution
+// Config Dynamic Initializers
 import('./config.js')
     .then(config => {
         API_KEY = config.WEATHER_API_KEY;
-        fetchAtmosphericSensorStream();
-        setInterval(fetchAtmosphericSensorStream, 600000); // 10 Min Polling Engine
+        runAtmosphericFeedsEngine();
+        setInterval(runAtmosphericFeedsEngine, 600000); // 10 Min Polling Cycle
     })
     .catch(() => {
-        weatherDisplay.innerHTML = `<p style="color: #ff0055;">AWAITING LOCAL SECURE PROFILE VALUE...</p>`;
+        weatherDisplay.innerHTML = `<p style="color: #eab308; font-size:0.75rem;">Awaiting local profile key registration...</p>`;
         API_KEY = localStorage.getItem('weather_api_key');
         if (!API_KEY) {
-            API_KEY = prompt("ENTER SYSTEM OPENWEATHER KEY:");
+            API_KEY = prompt("Enter Tac-Com Weather API Key:");
             if (API_KEY) {
                 localStorage.setItem('weather_api_key', API_KEY);
                 location.reload();
             }
         } else {
-            fetchAtmosphericSensorStream();
-            setInterval(fetchAtmosphericSensorStream, 600000);
+            runAtmosphericFeedsEngine();
+            setInterval(runAtmosphericFeedsEngine, 600000);
         }
     });
 
-// Initial boot execution hooks
+// Run standard layout build orders
 saveAndRenderTasks();
-initCanvasWaveOscillator();
