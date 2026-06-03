@@ -193,6 +193,35 @@
         </div>
     </div>
 
+    <div class="hud-nested-card settings-panel">
+    <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+    <div class="card-header-label">SYSTEM PREFERENCES MANAGER</div>
+    <div class="settings-row">
+        <label>SYSTEM ACCENT TINT:</label>
+        <select id="setting-theme">
+            <option value="cyan">CYAN MATRIX</option>
+            <option value="magenta">MAGENTA OVERRIDE</option>
+            <option value="amber">AMBER ALERT</option>
+        </select>
+    </div>
+    <div class="settings-row">
+        <label>TARGET DATA STATION CITY:</label>
+        <input type="text" id="setting-city" placeholder="e.g. Tokyo">
+        <button id="save-settings-btn" class="hud-action-btn">COMMIT CONFIG_</button>
+    </div>
+</div>
+
+<div id="hud-modal-overlay" class="hidden">
+    <div class="cyber-window-box modal-box">
+        <div class="window-header">
+            <span class="window-title">// VECTOR METADATA INSPECTOR</span>
+            <button id="close-modal-btn">✖ CLOSE</button>
+        </div>
+        <div class="window-content-body" id="modal-details-body">
+            </div>
+    </div>
+</div>
+
     <script type="module" src="app.js"></script>
 </body>
 </html>
