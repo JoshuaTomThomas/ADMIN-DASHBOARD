@@ -3,54 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminOS // Tactical HUD Terminal</title>
+    <title>AdminOS // Command Terminal v4.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hud-scanlines"></div>
+    <div class="hud-glitch-overlay"></div>
+    <div class="hud-matrix-grid"></div>
 
     <div class="admin-wrapper">
         
         <nav class="sidebar">
             <div class="sidebar-brand">
-                AdminOS<span class="hud-blink">_</span>
+                <span class="tech-bracket">[</span> ADMIN_OS <span class="tech-bracket">]</span>
+                <div class="sub-brand">TAC-COM INTERFACE v4.02</div>
             </div>
-            <div class="tech-rail"></div>
+            
             <ul class="nav-links">
                 <li class="nav-item active" data-target="overview-panel">
-                    <div class="nav-hex-btn">
-                        <span class="hex-icon">📊</span>
-                        <span class="hex-text">OVERVIEW</span>
+                    <div class="nav-cyber-inner">
+                        <div class="nav-indicator"></div>
+                        <span class="matrix-text">01 // OVERVIEW MATRIX</span>
                     </div>
                 </li>
                 <li class="nav-item" data-target="weather-panel">
-                    <div class="nav-hex-btn">
-                        <span class="hex-icon">🌍</span>
-                        <span class="hex-text">LIVE WEATHER</span>
+                    <div class="nav-cyber-inner">
+                        <div class="nav-indicator"></div>
+                        <span class="matrix-text">02 // WEATHER TELEMETRY</span>
                     </div>
                 </li>
                 <li class="nav-item" data-target="tasks-panel">
-                    <div class="nav-hex-btn">
-                        <span class="hex-icon">📋</span>
-                        <span class="hex-text">TASK MANAGER</span>
+                    <div class="nav-cyber-inner">
+                        <div class="nav-indicator"></div>
+                        <span class="matrix-text">03 // TASK OPERATIONS</span>
                     </div>
                 </li>
             </ul>
-            <div class="sidebar-system-footer">STREAM COMPILATION: ACTIVE</div>
+
+            <div class="sidebar-diagnostics">
+                <div>SYS_LOAD: 24.8%</div>
+                <div>GRID_LINK: STABLE</div>
+            </div>
         </nav>
 
         <div class="main-content">
             
             <header class="top-bar">
-                <div class="hud-header-module">
-                    <div class="tech-edge-tl"></div>
-                    <div id="greeting">SYSTEMS ONLINE // ADMIN</div>
+                <div class="hud-header-panel left-panel">
+                    <span class="status-blinker"></span>
+                    <div id="greeting">INITIALIZING COMMAND MATRIX...</div>
                 </div>
-                <div class="hud-header-module clock-module">
-                    <span class="tech-tag">DATALINK::</span>
+                
+                <div class="hud-center-crosshair">
+                    <span>▲</span> NODE_07 <span>▼</span>
+                </div>
+
+                <div class="hud-header-panel right-panel">
+                    <span class="prefix-tag">SYS_TIME //</span>
                     <div id="clock">00:00:00</div>
                 </div>
             </header>
@@ -58,91 +69,79 @@
             <div class="panel-container">
                 
                 <section id="overview-panel" class="dashboard-panel active">
-                    <h2 class="panel-cyber-title">// GLOBAL REPOSITORY OVERVIEW</h2>
-                    
-                    <div class="overview-layout-grid">
-                        <div class="cyber-data-card">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="card-meta-title">TOTAL REGISTERED VECTORS</div>
-                            <div class="metric-flex">
+                    <h2 class="panel-cyber-title">> COGNITIVE METRIC GRID</h2>
+                    <div class="analytics-grid">
+                        
+                        <div class="cyber-stat-card cyan-glow">
+                            <div class="tech-border-corner tl"></div><div class="tech-border-corner br"></div>
+                            <div class="stat-meta">DATA VECTOR REGISTRY</div>
+                            <div class="metric-wrapper">
                                 <p id="stat-total-tasks">0</p>
-                                <div class="hud-mini-graph">
-                                    <span style="height: 40%"></span>
-                                    <span style="height: 65%"></span>
-                                    <span style="height: 85%"></span>
-                                    <span style="height: 50%"></span>
-                                </div>
+                                <div class="vector-loading-bar"><span style="width: 75%"></span></div>
                             </div>
-                            <div class="tech-data-feed">SYS_RECON // SECURE_STREAM_01</div>
                         </div>
 
-                        <div class="cyber-data-card">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="card-meta-title">COMPLETED OPERATIONS</div>
-                            <div class="metric-flex">
+                        <div class="cyber-stat-card magenta-glow">
+                            <div class="tech-border-corner tl"></div><div class="tech-border-corner br"></div>
+                            <div class="stat-meta">EXECUTED PIPELINES</div>
+                            <div class="metric-wrapper">
                                 <p id="stat-completed-tasks">0</p>
-                                <div class="hud-radial-ring">
-                                    <div class="inner-pulse-core"></div>
-                                </div>
+                                <div class="vector-loading-bar magenta"><span style="width: 45%"></span></div>
                             </div>
-                            <div class="tech-data-feed">PIPELINE_METRIC // VERIFIED</div>
                         </div>
 
-                        <div class="cyber-data-card">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="card-meta-title">CORE AMBIENT TEMPERATURE</div>
-                            <div class="metric-flex">
+                        <div class="cyber-stat-card green-glow">
+                            <div class="tech-border-corner tl"></div><div class="tech-border-corner br"></div>
+                            <div class="stat-meta">THERMAL CORE FEED</div>
+                            <div class="metric-wrapper">
                                 <p id="stat-temp">--°C</p>
-                                <div class="hud-mini-graph waves">
-                                    <span style="height: 30%"></span>
-                                    <span style="height: 75%"></span>
-                                    <span style="height: 45%"></span>
-                                    <span style="height: 90%"></span>
-                                </div>
+                                <div class="vector-loading-bar green"><span style="width: 60%"></span></div>
                             </div>
-                            <div class="tech-data-feed">ENVIRONMENTAL // THERMAL_SENSORS</div>
                         </div>
+
                     </div>
                 </section>
 
                 <section id="weather-panel" class="dashboard-panel">
-                    <h2 class="panel-cyber-title">// ATMOSPHERIC TELEMETRY STATION</h2>
-                    
-                    <div class="weather-hud-split">
-                        <div class="cyber-panel-box telemetry-log">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                    <h2 class="panel-cyber-title">> ATMOSPHERIC SCANNER ARRAY</h2>
+                    <div class="weather-hud-layout">
+                        
+                        <div class="cyber-panel-container telemetry-feed">
+                            <div class="panel-header-tag">DATALINK LOG</div>
                             <div id="weather-display">
-                                <p class="initializing-text">LINKING GEOLOCATION COORDINATE SENSORS...</p>
+                                <p class="loading-prompt">AWAITING SENSOR CALIBRATION...</p>
                             </div>
                             <div class="sync-status">
-                                <span class="neon-pulse-dot"></span> 
+                                <span class="neon-pulse-node"></span>
                                 <span id="sync-time">LAST COMPILATION: STANDBY</span>
                             </div>
                         </div>
 
-                        <div class="cyber-panel-box globe-visualization">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="globe-container">
-                                <div class="orbital-ring axis-x"></div>
-                                <div class="orbital-ring axis-y"></div>
-                                <div class="hud-hologram-globe"></div>
-                                <div class="scanner-laser-line"></div>
+                        <div class="cyber-panel-container globe-deck">
+                            <div class="panel-header-tag">VISUAL TRACKING MATRIX</div>
+                            <div class="hologram-viewport">
+                                <svg class="svg-hud-rings" viewBox="0 0 200 200">
+                                    <circle class="ring-outer" cx="100" cy="100" r="85" />
+                                    <circle class="ring-middle" cx="100" cy="100" r="70" stroke-dasharray="10 15" />
+                                    <circle class="ring-inner" cx="100" cy="100" r="55" stroke-dasharray="5 5" />
+                                </svg>
+                                <div class="hologram-globe">
+                                    <div class="globe-grid-lines"></div>
+                                </div>
+                                <div class="laser-scanner-sweep"></div>
                             </div>
-                            <div class="radar-tag-label">LIVE SYNC ACTIVE</div>
                         </div>
+
                     </div>
                 </section>
 
                 <section id="tasks-panel" class="dashboard-panel">
-                    <h2 class="panel-cyber-title">// TACTICAL OPERATIONS MATRIX</h2>
-                    
-                    <div class="cyber-panel-box operations-console">
-                        <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                    <h2 class="panel-cyber-title">> OPERATIONAL PIPELINE INTERFACES</h2>
+                    <div class="cyber-panel-container operational-deck">
+                        <div class="panel-header-tag">MANIFOLD CONTROLLER</div>
                         <form id="todo-form">
-                            <div class="input-glow-wrapper">
-                                <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR..." required autocomplete="off">
-                            </div>
-                            <button type="submit" class="cyber-terminal-btn">DEPLOY</button>
+                            <input type="text" id="todo-input" placeholder="INPUT OPERATIONAL DEPLOYMENT VECTOR..." required autocomplete="off">
+                            <button type="submit" class="cyber-deploy-button">DEPLOY_</button>
                         </form>
                         <ul id="todo-list"></ul>
                     </div>
