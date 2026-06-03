@@ -1,125 +1,179 @@
 :root {
-    --void-black: #030611;
-    --glass-blue: rgba(10, 18, 42, 0.65);
+    --bg-void-black: #030612;
+    --bg-sidebar-dark: #070c20;
     --neon-cyan: #00f3ff;
     --neon-pink: #ff0055;
     --neon-green: #00ff66;
-    --cyan-glow-intensity: 0 0 15px rgba(0, 243, 255, 0.3);
-    --pink-glow-intensity: 0 0 15px rgba(255, 0, 85, 0.3);
-    --font-heading: 'Orbitron', sans-serif;
-    --font-terminal: 'Share Tech Mono', monospace;
+    --panel-glass-tint: rgba(10, 19, 44, 0.65);
+    --cyan-neon-glow: 0 0 15px rgba(0, 243, 255, 0.35);
+    --pink-neon-glow: 0 0 15px rgba(255, 0, 85, 0.35);
+    --font-sci-fi: 'Orbitron', sans-serif;
+    --font-telemetry: 'Share Tech Mono', monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--void-black); color: #ffffff; font-family: var(--font-terminal); height: 100vh; overflow: hidden; }
+body { background-color: var(--bg-void-black); color: #ffffff; font-family: var(--font-telemetry); height: 100vh; overflow: hidden; }
 
-/* Screen Filters & Scanlines */
-.hud-scanline-matrix {
-    position: fixed; top:0; left:0; width:100%; height:100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 243, 255, 0.03) 50%);
-    background-size: 100% 4px; pointer-events: none; z-index: 999;
-}
-.hud-ambient-glow {
+/* 1. INTERFACE DISPLAY FILTERS */
+.hud-raster-matrix {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: radial-gradient(circle at 50% 40%, rgba(12, 24, 68, 0.45) 0%, transparent 80%);
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 243, 255, 0.02) 50%);
+    background-size: 100% 4px; pointer-events: none; z-index: 9999;
+}
+.hud-lens-flare {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle at 50% 35%, rgba(12, 26, 72, 0.5) 0%, transparent 85%);
     pointer-events: none; z-index: 0;
 }
 .admin-wrapper { display: flex; height: 100vh; position: relative; z-index: 2; }
 
-/* Fixed Navigation Sidebar */
-.sidebar { width: 280px; background-color: #060b1e; border-right: 1px solid rgba(0, 243, 255, 0.3); padding: 40px 18px; display: flex; flex-direction: column; }
-.sidebar-brand { font-family: var(--font-heading); font-weight: 900; font-size: 1.5rem; text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); text-align: center; margin-bottom: 40px; letter-spacing: 2px; }
+/* 2. THE ADVANCED TERMINAL SIDEBAR */
+.sidebar {
+    width: 280px; background-color: var(--bg-sidebar-dark);
+    border-right: 1px solid rgba(0, 243, 255, 0.3); padding: 40px 18px; display: flex; flex-direction: column;
+}
+.sidebar-brand {
+    font-family: var(--font-sci-fi); font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); text-align: center; margin-bottom: 45px;
+}
 .nav-links { list-style: none; }
-.nav-item { margin-bottom: 16px; cursor: pointer; clip-path: polygon(0 0, 88% 0, 100% 32%, 100% 100., 0 100%); border: 1px solid rgba(0, 243, 255, 0.15); background: rgba(4, 7, 20, 0.5); transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.nav-capsule { padding: 16px 20px; display: flex; align-items: center; gap: 15px; }
-.icon-node { color: var(--neon-cyan); opacity: 0.6; }
-.label-node { font-family: var(--font-heading); font-size: 0.8rem; color: #7a93b4; }
-.nav-item:hover, .nav-item.active { background: rgba(0, 243, 255, 0.08); border-color: var(--neon-cyan); box-shadow: var(--cyan-glow-intensity); }
+.nav-item {
+    margin-bottom: 16px; cursor: pointer; transition: all 0.3s cubic-bezier(0.1, 0.8, 0.2, 1);
+    clip-path: polygon(0 0, 88% 0, 100% 32%, 100% 100%, 0 100%);
+    border: 1px solid rgba(0, 243, 255, 0.15); background: rgba(5, 9, 24, 0.6);
+}
+.nav-hex-casing { padding: 18px 22px; display: flex; align-items: center; gap: 16px; }
+.icon-node { color: var(--neon-cyan); opacity: 0.7; }
+.label-node { font-family: var(--font-sci-fi); font-size: 0.8rem; color: #768fb3; }
+
+.nav-item:hover, .nav-item.active { background: rgba(0, 243, 255, 0.08); border-color: var(--neon-cyan); box-shadow: var(--cyan-neon-glow); }
 .nav-item.active .label-node { color: var(--neon-cyan); font-weight: bold; text-shadow: 0 0 8px rgba(0, 243, 255, 0.6); }
-.sidebar-telemetry-tag { margin-top: auto; font-size: 0.75rem; color: #435875; text-align: center; font-family: var(--font-heading); }
+.sidebar-footer-stats { margin-top: auto; font-family: var(--font-sci-fi); font-size: 0.7rem; color: #405777; text-align: center; }
 
-/* Main Dynamic Terminal Content Panel */
+/* 3. CENTER TOP HEADER WORKSPACE */
 .main-content { flex: 1; display: flex; flex-direction: column; }
-.top-bar { padding: 22px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 243, 255, 0.2); background: rgba(3, 6, 17, 0.85); }
-.header-status-block { border: 1px solid rgba(0, 243, 255, 0.25); padding: 10px 22px; background: rgba(5, 10, 26, 0.8); display: flex; align-items: center; gap: 12px; font-family: var(--font-heading); font-size: 0.8rem; color: var(--neon-cyan); clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%); }
-.clock-block { clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%); font-family: var(--font-heading); }
-.status-indicator-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
-.header-center-divider { font-family: var(--font-heading); font-size: 0.8rem; color: rgba(255,255,255,0.3); letter-spacing: 2px; }
-.tag-prefix { color: var(--neon-pink); }
-#clock { font-size: 1.25rem; font-weight: bold; color: #ffffff; }
+.top-bar {
+    padding: 22px 40px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.25); background: rgba(3, 5, 15, 0.85);
+}
+.hud-header-tag {
+    border: 1px solid rgba(0, 243, 255, 0.25); padding: 10px 24px; background: rgba(4, 8, 22, 0.85);
+    display: flex; align-items: center; gap: 12px; font-family: var(--font-sci-fi); font-size: 0.8rem; color: var(--neon-cyan);
+}
+.left-tag { clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%); }
+.right-tag { clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%); }
+.blinking-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+.hud-compass-hud { font-family: var(--font-sci-fi); font-size: 0.8rem; color: rgba(255,255,255,0.25); letter-spacing: 2px; }
+.prefix-deco { color: var(--neon-pink); }
+#clock { font-size: 1.3rem; font-weight: 700; color: #ffffff; }
 
-/* Modular Bounding Panel System Containers */
+/* 4. MODULAR COGNITIVE WORKSPACE GRIDS */
 .panel-container { padding: 40px; flex: 1; overflow-y: auto; }
 .dashboard-panel { display: none; }
-.dashboard-panel.active { display: block; animation: terminalBoot 0.4s ease-out; }
-.panel-section-title { font-family: var(--font-heading); font-size: 1.1rem; color: #ffffff; margin-bottom: 25px; letter-spacing: 1.5px; }
+.dashboard-panel.active { display: block; animation: monitorFadeIn 0.4s ease-out; }
 
-/* Layout Grid Arrays */
-.overview-subgrid, .weather-split-deck { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-.hud-nested-card { background: var(--glass-blue); border: 1px solid rgba(0, 243, 255, 0.2); padding: 25px; position: relative; clip-path: polygon(0 0, 94% 0, 100% 10%, 100% 100%, 0 100%); box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.03); }
+.overview-grid-layout, .weather-split-deck {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
+}
+.hud-cyber-card {
+    background: var(--panel-glass-tint); border: 1px solid rgba(0, 243, 255, 0.2);
+    padding: 25px; position: relative; clip-path: polygon(0 0, 93% 0, 100% 9%, 100% 100%, 0 100%);
+    box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.04);
+}
 
-/* Structural Corner Accents */
-.bracket-deco { position: absolute; width: 12px; height: 12px; border: 2px solid var(--neon-cyan); }
-.bracket-deco.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-.bracket-deco.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
-.card-header-label { font-size: 0.75rem; color: #506b8e; font-family: var(--font-heading); }
-.metric-display { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
-.hud-nested-card p { font-family: var(--font-heading); font-size: 2.6rem; font-weight: 900; }
+/* Geometric Bounding Accents */
+.corner-bracket { position: absolute; width: 12px; height: 12px; border: 2px solid var(--neon-cyan); }
+.corner-bracket.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.corner-bracket.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-/* Graphs and CSS Load Bars */
-.pure-css-graph { display: flex; align-items: flex-end; gap: 4px; height: 38px; width: 60px; }
-.pure-css-graph span { flex: 1; background: var(--neon-cyan); box-shadow: 0 0 5px var(--neon-cyan); }
-.pure-css-graph.waves span { background: var(--neon-pink); box-shadow: 0 0 5px var(--neon-pink); }
-.hud-radial-loader { width: 42px; height: 42px; border-radius: 50%; border: 2px dashed var(--neon-cyan); display: flex; align-items: center; justify-content: center; animation: rotateHUD 15s linear infinite; }
-.radial-pulse-core { width: 14px; height: 14px; border-radius: 50%; background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+.card-meta-label { font-family: var(--font-sci-fi); font-size: 0.75rem; color: #4e678a; }
+.flex-metric { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+.hud-cyber-card h1 { font-family: var(--font-sci-fi); font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+.sub-stream-info { font-family: var(--font-sci-fi); font-size: 0.6rem; color: rgba(0, 243, 255, 0.35); overflow: hidden; white-space: nowrap; }
 
-/* NEW FEATURE STYLES: Live Diagnostics Elements */
-.diag-flex-grid { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
-.diag-bar-container { display: flex; flex-direction: column; gap: 5px; font-family: var(--font-terminal); font-size: 0.9rem; }
-.diag-track { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(0,243,255,0.1); position: relative; }
-.diag-fill { height: 100%; background: var(--neon-cyan); box-shadow: var(--cyan-glow-intensity); transition: width 0.4s ease; }
-.diag-fill.magenta { background: var(--neon-pink); box-shadow: var(--pink-glow-intensity); }
+/* 5. DIAGNOSTIC DATA COMPONENTS (BARS & WAVE OSCILLATORS) */
+.css-chart-bars { display: flex; align-items: flex-end; gap: 4px; height: 38px; width: 60px; }
+.css-chart-bars span { flex: 1; background: var(--neon-cyan); box-shadow: var(--cyan-neon-glow); }
+.magenta-neon .css-chart-bars span { background: var(--neon-pink); box-shadow: var(--pink-neon-glow); }
 
-/* Hologram Radar Sphere Components */
-.hologram-viewport-frame { position: relative; height: 200px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(0, 243, 255, 0.06) 0%, transparent 70%); margin-top: 15px; }
-.hud-svg-circles { position: absolute; width: 200px; height: 200px; }
-.hud-svg-circles circle { fill: none; transform-origin: center; }
-.outer-wire { stroke: rgba(0, 243, 255, 0.15); stroke-width: 1px; }
-.mid-dashed { stroke: var(--neon-cyan); stroke-width: 1px; animation: rotateHUD 25s linear infinite; }
-.inner-dotted { stroke: var(--neon-pink); stroke-width: 1.5px; animation: rotateHUD 12s linear infinite reverse; }
-.spinning-hologram-sphere { width: 100px; height: 100px; border-radius: 50%; border: 1px dashed rgba(0, 243, 255, 0.35); box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.2); position: relative; overflow: hidden; }
-.sphere-grid-texture { position: absolute; width: 200%; height: 100%; background-image: linear-gradient(90deg, transparent 49%, rgba(0, 243, 255, 0.15) 50%, transparent 51%); background-size: 16px 100%; animation: spinGlobe 4s linear infinite; }
-.laser-scanner-sweep-bar { position: absolute; left: 15%; width: 70%; height: 2px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); animation: sweepTrack 2.5s ease-in-out infinite; }
+.css-radial-ring {
+    width: 42px; height: 42px; border-radius: 50%; border: 2px dashed var(--neon-pink);
+    display: flex; align-items: center; justify-content: center; animation: spinLoop 15s linear infinite;
+}
+.pulsing-heart-node { width: 14px; height: 14px; border-radius: 50%; background: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
 
-/* Operational Form Fields */
-.full-width-ops #todo-form { display: flex; gap: 15px; margin: 20px 0; }
-#todo-input { flex: 1; background: rgba(3, 6, 17, 0.9); border: 1px solid rgba(0, 243, 255, 0.3); padding: 14px 20px; font-family: var(--font-terminal); font-size: 1rem; color: #ffffff; outline: none; }
-#todo-input:focus { border-color: var(--neon-cyan); box-shadow: var(--cyan-glow-intensity); }
-.hud-deploy-btn { background: transparent; border: 1px solid var(--neon-pink); color: #ffffff; font-family: var(--font-heading); font-weight: bold; padding: 0 35px; cursor: pointer; transition: all 0.3s ease; clip-path: polygon(0 0, 85% 0, 100% 35%, 100% 100%, 0 100%); }
-.hud-deploy-btn:hover { background: var(--neon-pink); box-shadow: var(--pink-glow-intensity); }
+/* 6. HOLOGRAPHIC PLANETARY RADAR DECK */
+.hologram-viewport {
+    position: relative; height: 210px; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.08) 0%, transparent 70%); margin-top: 15px;
+}
+.svg-telemetry-rings { position: absolute; width: 200px; height: 200px; }
+.svg-telemetry-rings circle { fill: none; transform-origin: center; }
+.ring-wire-outer { stroke: rgba(0, 243, 255, 0.15); stroke-width: 1px; }
+.ring-wire-dashed { stroke: var(--neon-cyan); stroke-width: 1px; animation: spinLoop 24s linear infinite; }
+.ring-wire-dotted { stroke: var(--neon-pink); stroke-width: 1.5px; animation: spinLoop 12s linear infinite reverse; }
 
-/* Task Output Document Rails */
+.cyber-globe-mesh {
+    width: 105px; height: 105px; border-radius: 50%; border: 1px dashed rgba(0, 243, 255, 0.4);
+    box-shadow: inset 0 0 25px rgba(0, 243, 255, 0.25); position: relative; overflow: hidden;
+    }
+.globe-longitude-stripes {
+    position: absolute; width: 200%; height: 100%;
+    background-image: linear-gradient(90deg, transparent 49%, rgba(0, 243, 255, 0.2) 50%, transparent 51%);
+    background-size: 16px 100%; animation: globeRoll 4s linear infinite;
+}
+.laser-radar-sweep-line {
+    position: absolute; left: 15%; width: 70%; height: 2px; background: var(--neon-cyan);
+    box-shadow: 0 0 12px var(--neon-cyan); animation: sweepGrid 2.5s ease-in-out infinite;
+}
+.hologram-footer-tag { margin-top: 15px; font-family: var(--font-sci-fi); font-size: 0.75rem; color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); text-align: center; }
+
+/* 7. TRANSACTION DISPATCH OPERATIONS PANELS */
+#todo-form { display: flex; gap: 15px; margin: 20px 0; }
+#todo-input {
+    flex: 1; background: rgba(3, 5, 14, 0.9); border: 1px solid rgba(0, 243, 255, 0.35);
+    padding: 15px 20px; font-family: var(--font-telemetry); font-size: 1rem; color: #ffffff; outline: none;
+}
+#todo-input:focus { border-color: var(--neon-cyan); box-shadow: var(--cyan-neon-glow); }
+
+.hud-terminal-deploy-btn {
+    background: transparent; border: 1px solid var(--neon-pink); color: #ffffff;
+    font-family: var(--font-sci-fi); font-weight: bold; padding: 0 35px; cursor: pointer;
+    transition: all 0.3s; clip-path: polygon(0 0, 85% 0, 100% 35%, 100% 100%, 0 100%);
+}
+.hud-terminal-deploy-btn:hover { background: var(--neon-pink); box-shadow: var(--pink-neon-glow); }
+
 #todo-list { list-style: none; }
-#todo-list li { background: rgba(3, 6, 17, 0.5); border-left: 3px solid var(--neon-cyan); padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-#todo-list li button { background: transparent; border: 1px solid rgba(255, 0, 85, 0.5); color: var(--neon-pink); padding: 5px 14px; cursor: pointer; font-family: var(--font-heading); font-size: 0.65rem; }
-#todo-list li button:hover { background: var(--neon-pink); color: #fff; box-shadow: var(--pink-glow-intensity); }
-.completed-task { opacity: 0.35; text-decoration: line-through; color: #506b8e !important; }
+#todo-list li {
+    background: rgba(3, 5, 14, 0.55); border-left: 3px solid var(--neon-cyan);
+    padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
+}
+#todo-list li button {
+    background: transparent; border: 1px solid rgba(255, 0, 85, 0.5); color: var(--neon-pink);
+    padding: 5px 14px; cursor: pointer; font-family: var(--font-sci-fi); font-size: 0.65rem;
+}
+#todo-list li button:hover { background: var(--neon-pink); color: #fff; box-shadow: var(--pink-neon-glow); }
+.completed-task { opacity: 0.35; text-decoration: line-through; color: #4e678a !important; }
 
-/* Text Output Layout Overrides */
-#weather-display h3 { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 6px; color: var(--neon-cyan); }
-.sync-status { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 0.85rem; color: #506b8e; }
-.pulse-node-green { width: 6px; height: 6px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); }
+/* 8. SYSTEM ALARM TOAST ALERTS DECK */
+#hud-alert-deck { position: fixed; bottom: 35px; right: 35px; display: flex; flex-direction: column; gap: 12px; z-index: 10000; }
+.hud-alert-capsule {
+    background: rgba(255, 0, 85, 0.16); border: 1px solid var(--neon-pink); color: #fff; padding: 16px 25px;
+    font-family: var(--font-telemetry); font-size: 0.9rem; box-shadow: var(--pink-neon-glow);
+    animation: alertSlideIn 0.35s cubic-bezier(0.1, 0.8, 0.2, 1); clip-path: polygon(0 0, 92% 0, 100% 35%, 100% 100%, 0 100%);
+}
+.hud-alert-capsule.success { background: rgba(0, 255, 102, 0.16); border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0,255,102,0.25); }
 
-/* NEW FEATURE STYLES: Interactive Toast Alert Popups Zone */
-#hud-toast-zone { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 10000; }
-.hud-toast { background: rgba(255, 0, 85, 0.15); border: 1px solid var(--neon-pink); color: #ffffff; padding: 15px 25px; font-family: var(--font-terminal); font-size: 0.9rem; letter-spacing: 1px; box-shadow: var(--pink-glow-intensity); animation: toastSlideIn 0.3s cubic-bezier(0.1, 0.8, 0.2, 1); clip-path: polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%); }
-.hud-toast.success { background: rgba(0, 255, 102, 0.15); border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0, 255, 102, 0.25); }
+/* Weather Text Styling Handles */
+#weather-display h3 { font-family: var(--font-sci-fi); font-size: 1.3rem; margin-bottom: 6px; color: var(--neon-cyan); }
+.sync-footer-time { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 0.85rem; color: #4e678a; }
+.sync-pulse-dot { width: 6px; height: 6px; background-color: var(--neon-green); border-radius: 50%; box-shadow: 0 0 8px var(--neon-green); }
 
-/* Core Animation Engines */
-@keyframes terminalBoot { 0% { opacity: 0; transform: scale(0.995) translateY(4px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes rotateHUD { 100% { transform: rotate(360deg); } }
-@keyframes spinGlobe { 0% { background-position-x: 0px; } 100% { background-position-x: 32px; } }
-@keyframes sweepTrack { 0%, 100% { top: 15%; opacity: 0.3; } 50% { top: 85%; opacity: 1; } }
-@keyframes toastSlideIn { from { transform: translateX(100%) scale(0.9); opacity: 0; } to { transform: translateX(0) scale(1); opacity: 1; } }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-.cursor-flicker { animation: blink 1.2s infinite; color: var(--neon-pink); }
+/* FX ANIMATION TIMELINES */
+@keyframes monitorFadeIn { 0% { opacity: 0; transform: scale(0.99) translateY(4px); filter: brightness(2.5); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1); } }
+@keyframes spinLoop { 100% { transform: rotate(360deg); } }
+@keyframes globeRoll { 0% { background-position-x: 0px; } 100% { background-position-x: 32px; } }
+@keyframes sweepGrid { 0%, 100% { top: 15%; opacity: 0.3; } 50% { top: 85%; opacity: 1; } }
+@keyframes alertSlideIn { from { transform: translateX(100%) scale(0.9); opacity: 0; } to { transform: translateX(0) scale(1); opacity: 1; } }
+@keyframes flick { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hud-flicker { animation: flick 1.2s infinite; color: var(--neon-pink); }

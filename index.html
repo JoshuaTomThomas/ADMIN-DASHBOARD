@@ -3,67 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminOS // Strategic Command Deck v5.0</title>
+    <title>AdminOS // Tactical Interface Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hud-scanline-matrix"></div>
-    <div class="hud-ambient-glow"></div>
+    <div class="hud-raster-matrix"></div>
+    <div class="hud-lens-flare"></div>
 
-    <div id="hud-toast-zone"></div>
-
-    <audio id="sfx-click" src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg" preload="auto"></audio>
-    <audio id="sfx-deploy" src="https://actions.google.com/sounds/v1/science_fiction/teleport.ogg" preload="auto"></audio>
-    <audio id="sfx-alert" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+    <div id="hud-alert-deck"></div>
 
     <div class="admin-wrapper">
         
         <nav class="sidebar">
             <div class="sidebar-brand">
-                AdminOS<span class="cursor-flicker">_</span>
+                AdminOS<span class="hud-flicker">_</span>
             </div>
             
             <ul class="nav-links">
                 <li class="nav-item active" data-target="overview-panel">
-                    <div class="nav-capsule">
-                        <span class="icon-node">⚏</span>
-                        <span class="label-node">01 // OVERVIEW</span>
+                    <div class="nav-hex-casing">
+                        <div class="icon-node">⚏</div>
+                        <div class="label-node">OVERVIEW</div>
                     </div>
                 </li>
                 <li class="nav-item" data-target="weather-panel">
-                    <div class="nav-capsule">
-                        <span class="icon-node">☼</span>
-                        <span class="label-node">02 // WEATHER</span>
+                    <div class="nav-hex-casing">
+                        <div class="icon-node">☼</div>
+                        <div class="label-node">LIVE WEATHER</div>
                     </div>
                 </li>
                 <li class="nav-item" data-target="tasks-panel">
-                    <div class="nav-capsule">
-                        <span class="icon-node">⎔</span>
-                        <span class="label-node">03 // OPERATIONS</span>
+                    <div class="nav-hex-casing">
+                        <div class="icon-node">⎔</div>
+                        <div class="label-node">TASK MANAGER</div>
                     </div>
                 </li>
             </ul>
 
-            <div class="sidebar-telemetry-tag">SECURE CORE LINK // ACTIVE</div>
+            <div class="sidebar-footer-stats">SECURE STREAM // ONLINE</div>
         </nav>
 
         <div class="main-content">
             
             <header class="top-bar">
-                <div class="header-status-block">
-                    <span class="status-indicator-dot green"></span>
-                    <div id="greeting">SYSTEMS OPERATIONAL // ADMIN_NODE</div>
+                <div class="hud-header-tag left-tag">
+                    <span class="blinking-dot green"></span>
+                    <div id="greeting">INITIALIZING DATA FEEDS...</div>
                 </div>
                 
-                <div class="header-center-divider">
-                    <span class="arrow-deco">▲</span> TAC-COM CONTROL LINK <span class="arrow-deco">▼</span>
+                <div class="hud-compass-hud">
+                    <span class="compass-arrow">◀</span> CORE INTERFACE SYSTEM <span class="compass-arrow">▶</span>
                 </div>
 
-                <div class="header-status-block clock-block">
-                    <span class="tag-prefix">SYS_CLK //</span>
+                <div class="hud-header-tag right-tag">
+                    <span class="prefix-deco">SYS_TIME //</span>
                     <div id="clock">00:00:00</div>
                 </div>
             </header>
@@ -71,105 +67,90 @@
             <div class="panel-container">
                 
                 <section id="overview-panel" class="dashboard-panel active">
-                    <h2 class="panel-section-title">// SYSTEM OVERVIEW MATRIX</h2>
-                    
-                    <div class="overview-subgrid">
-                        <div class="hud-nested-card blue-tint">
-                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                            <div class="card-header-label">TOTAL OPERATIONAL VECTORS</div>
-                            <div class="metric-display">
-                                <p id="stat-total-tasks">0</p>
-                                <div class="pure-css-graph bars">
-                                    <span style="height: 45%"></span><span style="height: 80%"></span>
-                                    <span style="height: 60%"></span><span style="height: 95%"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="hud-nested-card magenta-tint">
-                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                            <div class="card-header-label">COMPLETED WORKFLOW PIPELINES</div>
-                            <div class="metric-display">
-                                <p id="stat-completed-tasks">0</p>
-                                <div class="pure-css-graph waves">
-                                    <span style="height: 30%"></span><span style="height: 75%"></span>
+                    <div class="overview-grid-layout">
+                        
+                        <div class="hud-cyber-card cyan-neon">
+                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
+                            <div class="card-meta-label">TOTAL OPERATIONAL METRICS</div>
+                            <div class="flex-metric">
+                                <h1 id="stat-total-tasks">0</h1>
+                                <div class="css-chart-bars">
                                     <span style="height: 40%"></span><span style="height: 85%"></span>
+                                    <span style="height: 55%"></span><span style="height: 95%"></span>
                                 </div>
                             </div>
+                            <div class="sub-stream-info">SYS_RECON // SUB_STREAM_ALPHA</div>
                         </div>
 
-                        <div class="hud-nested-card green-tint">
-                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                            <div class="card-header-label">AMBIENT CORE CONDUCTIVITY</div>
-                            <div class="metric-display">
-                                <p id="stat-temp">--°C</p>
-                                <div class="hud-radial-loader">
-                                    <div class="radial-pulse-core"></div>
+                        <div class="hud-cyber-card magenta-neon">
+                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
+                            <div class="card-meta-label">COMPLETED WORKFLOW SECTORS</div>
+                            <div class="flex-metric">
+                                <h1 id="stat-completed-tasks">0</h1>
+                                <div class="css-radial-ring">
+                                    <div class="pulsing-heart-node"></div>
                                 </div>
                             </div>
+                            <div class="sub-stream-info">LOGISTICS_DB // STATUS_VERIFIED</div>
                         </div>
-                    </div>
 
-                    <div class="hud-nested-card diagnostics-board" style="margin-top: 25px;">
-                        <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                        <div class="card-header-label">// PROCESSOR CORE METRICS LIVE STREAM</div>
-                        <div class="diag-flex-grid">
-                            <div class="diag-bar-container">
-                                <span>CPU_A [LOAD]: <strong id="cpu-a-text">0%</strong></span>
-                                <div class="diag-track"><div id="cpu-a-bar" class="diag-fill" style="width: 0%"></div></div>
+                        <div class="hud-cyber-card green-neon">
+                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
+                            <div class="card-meta-label">CORE TELEMETRY THERMALS</div>
+                            <div class="flex-metric">
+                                <h1 id="stat-temp">--°C</h1>
+                                <canvas id="realtime-line-graph" width="100" height="45"></canvas>
                             </div>
-                            <div class="diag-bar-container">
-                                <span>CPU_B [LOAD]: <strong id="cpu-b-text">0%</strong></span>
-                                <div class="diag-track"><div id="cpu-b-bar" class="diag-fill magenta" style="width: 0%"></div></div>
-                            </div>
+                            <div class="sub-stream-info">ENVIRONMENTAL // THERMAL_LINK</div>
                         </div>
+
                     </div>
                 </section>
 
                 <section id="weather-panel" class="dashboard-panel">
-                    <h2 class="panel-section-title">// LIVE WEATHER TELEMETRY STATION</h2>
-                    
                     <div class="weather-split-deck">
-                        <div class="hud-nested-card text-module">
-                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                            <div class="card-header-label">WEATHER STATION LOGS</div>
+                        
+                        <div class="hud-cyber-card telemetry-block">
+                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
+                            <div class="card-meta-label">ATMOSPHERIC RECON READOUT</div>
                             <div id="weather-display">
-                                <p class="loading-state-text">INITIALIZING GEOLOCATION COMPILATION FEED...</p>
+                                <p class="booting-log">> LINKING GEOLOCATION SENSOR ARRAYS...</p>
                             </div>
-                            <div class="sync-status">
-                                <span class="pulse-node-green"></span>
+                            <div class="sync-footer-time">
+                                <span class="sync-pulse-dot"></span>
                                 <span id="sync-time">LAST COMPILATION: STANDBY</span>
                             </div>
                         </div>
 
-                        <div class="hud-nested-card graphic-module">
-                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                            <div class="card-header-label">VISUAL INTERFACE PLANE</div>
-                            <div class="hologram-viewport-frame">
-                                <svg class="hud-svg-circles" viewBox="0 0 200 200">
-                                    <circle class="outer-wire" cx="100" cy="100" r="85" />
-                                    <circle class="mid-dashed" cx="100" cy="100" r="70" stroke-dasharray="12 10" />
-                                    <circle class="inner-dotted" cx="100" cy="100" r="55" stroke-dasharray="4 6" />
+                        <div class="hud-cyber-card hologram-visualization">
+                            <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
+                            <div class="card-meta-label">VISUAL SCANNING SURFACE PLANE</div>
+                            <div class="hologram-viewport">
+                                <svg class="svg-telemetry-rings" viewBox="0 0 200 200">
+                                    <circle class="ring-wire-outer" cx="100" cy="100" r="85" />
+                                    <circle class="ring-wire-dashed" cx="100" cy="100" r="72" stroke-dasharray="14 10" />
+                                    <circle class="ring-wire-dotted" cx="100" cy="100" r="58" stroke-dasharray="3 5" />
                                 </svg>
-                                <div class="spinning-hologram-sphere">
-                                    <div class="sphere-grid-texture"></div>
+                                
+                                <div class="cyber-globe-mesh">
+                                    <div class="globe-longitude-stripes"></div>
                                 </div>
-                                <div class="laser-scanner-sweep-bar"></div>
+                                <div class="laser-radar-sweep-line"></div>
                             </div>
+                            <div class="hologram-footer-tag">LIVE HUD NAVIGATION LINK ACTIVE</div>
                         </div>
+
                     </div>
                 </section>
 
                 <section id="tasks-panel" class="dashboard-panel">
-                    <h2 class="panel-section-title">// TACTICAL OPERATIONS CONTROLLER</h2>
-                    
-                    <div class="hud-nested-card full-width-ops">
-                        <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-                        <div class="card-header-label">MANIFOLD DISPATCH INTERFACE</div>
+                    <div class="hud-cyber-card operations-terminal-box">
+                        <div class="corner-bracket tl"></div><div class="corner-bracket br"></div>
+                        <div class="card-meta-label">TACTICAL WORKFLOW CAPTURE CONTROLLER</div>
                         
                         <form id="todo-form">
-                            <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR..." required autocomplete="off">
-                            <button type="submit" class="hud-deploy-btn">DEPLOY_</button>
+                            <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR CORRIDOR..." required autocomplete="off">
+                            <button type="submit" class="hud-terminal-deploy-btn">DEPLOY_</button>
                         </form>
                         
                         <ul id="todo-list"></ul>
