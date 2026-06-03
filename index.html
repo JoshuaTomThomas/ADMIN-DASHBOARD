@@ -12,10 +12,21 @@
 <body>
     <div class="hud-screen-matrix"></div>
 
+    <div id="hud-modal-overlay" class="hidden">
+        <div class="cyber-window-box modal-box">
+            <div class="window-header">
+                <span class="window-title">// VECTOR METADATA INSPECTOR</span>
+                <button id="close-modal-btn">✖ CLOSE</button>
+            </div>
+            <div class="window-content-body" id="modal-details-body">
+                </div>
+        </div>
+    </div>
+
     <div class="admin-wrapper">
         
         <nav class="sidebar">
-            <div class="sidebar-brand">AdminOS</div>
+            <div class="sidebar-brand">AdminOS<span class="cursor-flicker">_</span></div>
             
             <ul class="nav-links">
                 <li class="nav-item active" data-target="overview-panel">
@@ -60,7 +71,7 @@
                     
                     <div class="hud-column-wrapper">
                         <section id="overview-panel" class="dashboard-panel active">
-                            <div class="cyber-window-box">
+                            <div class="cyber-window-box" draggable="true">
                                 <div class="window-header">
                                     <span class="window-title">System Overview</span>
                                     <span class="window-dots">•••</span>
@@ -71,7 +82,7 @@
                                         <div class="pure-css-bar-chart">
                                             <span style="height: 40%"></span><span style="height: 75%"></span>
                                             <span style="height: 55%"></span><span style="height: 90%"></span>
-                                            <span style="height: 65%"></span><span style="height: 45%"></span>
+                                            <span style="height: 65%"></span><span class="reactive-bar"></span>
                                         </div>
                                         <div class="deck-metric-flex">
                                             <div class="metric-meta-group">
@@ -128,7 +139,7 @@
                     <div class="hud-column-wrapper double-deck">
                         
                         <section id="weather-panel" class="dashboard-panel active">
-                            <div class="cyber-window-box">
+                            <div class="cyber-window-box" draggable="true">
                                 <div class="window-header">
                                     <span class="window-title">Live Weather Syncing</span>
                                     <span class="window-dots">•••</span>
@@ -157,7 +168,7 @@
                         </section>
 
                         <section id="tasks-panel" class="dashboard-panel active">
-                            <div class="cyber-window-box">
+                            <div class="cyber-window-box" draggable="true">
                                 <div class="window-header">
                                     <span class="window-title">Task Operations</span>
                                     <span class="window-dots">•••</span>
@@ -186,41 +197,29 @@
                         </section>
 
                     </div>
+                </div>
 
+                <div class="hud-nested-card settings-panel">
+                    <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                    <div class="card-header-label">SYSTEM PREFERENCES MANAGER</div>
+                    <div class="settings-row">
+                        <label>SYSTEM ACCENT TINT:</label>
+                        <select id="setting-theme">
+                            <option value="cyan">CYAN MATRIX</option>
+                            <option value="magenta">MAGENTA OVERRIDE</option>
+                            <option value="amber">AMBER ALERT</option>
+                        </select>
+                    </div>
+                    <div class="settings-row">
+                        <label>TARGET DATA STATION CITY:</label>
+                        <input type="text" id="setting-city" placeholder="e.g. Tokyo">
+                        <button id="save-settings-btn" class="hud-action-btn">COMMIT CONFIG_</button>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-
-    <div class="hud-nested-card settings-panel">
-    <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
-    <div class="card-header-label">SYSTEM PREFERENCES MANAGER</div>
-    <div class="settings-row">
-        <label>SYSTEM ACCENT TINT:</label>
-        <select id="setting-theme">
-            <option value="cyan">CYAN MATRIX</option>
-            <option value="magenta">MAGENTA OVERRIDE</option>
-            <option value="amber">AMBER ALERT</option>
-        </select>
-    </div>
-    <div class="settings-row">
-        <label>TARGET DATA STATION CITY:</label>
-        <input type="text" id="setting-city" placeholder="e.g. Tokyo">
-        <button id="save-settings-btn" class="hud-action-btn">COMMIT CONFIG_</button>
-    </div>
-</div>
-
-<div id="hud-modal-overlay" class="hidden">
-    <div class="cyber-window-box modal-box">
-        <div class="window-header">
-            <span class="window-title">// VECTOR METADATA INSPECTOR</span>
-            <button id="close-modal-btn">✖ CLOSE</button>
-        </div>
-        <div class="window-content-body" id="modal-details-body">
-            </div>
-    </div>
-</div>
 
     <script type="module" src="app.js"></script>
 </body>
