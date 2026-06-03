@@ -3,35 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Dashboard</title>
+    <title>Enterprise Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <header class="dashboard-header">
-            <h1 id="greeting">Hello!</h1>
-            <h2 id="clock">00:00:00</h2>
-        </header>
+    <div class="admin-wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-brand">AdminOS</div>
+            <ul class="nav-links">
+                <li class="nav-item active" data-target="overview-panel">Overview</li>
+                <li class="nav-item" data-target="weather-panel">Live Weather</li>
+                <li class="nav-item" data-target="tasks-panel">Task Manager</li>
+            </ul>
+        </nav>
 
-        <main class="dashboard-content">
-            <section class="widget weather-widget">
-                <h3>Weather</h3>
-                <div id="weather-container">
-                    <p>Loading weather...</p>
-                </div>
-            </section>
+        <div class="main-content">
+            <header class="top-bar">
+                <div id="greeting">Welcome Back</div>
+                <div id="clock">00:00:00</div>
+            </header>
 
-            <section class="widget todo-widget">
-                <h3>Tasks</h3>
-                <form id="todo-form">
-                    <input type="text" id="todo-input" placeholder="Add a new task..." required>
-                    <button type="submit">Add</button>
-                </form>
-                <ul id="todo-list"></ul>
-            </section>
-        </main>
+            <div class="panel-container">
+                
+                <section id="overview-panel" class="dashboard-panel active">
+                    <h2>System Overview</h2>
+                    <div class="analytics-grid">
+                        <div class="stat-card">
+                            <h3>Total Tasks</h3>
+                            <p id="stat-total-tasks">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Completed Tasks</h3>
+                            <p id="stat-completed-tasks">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Current Temp</h3>
+                            <p id="stat-temp">--°C</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="weather-panel" class="dashboard-panel">
+                    <h2>Live Weather Syncing</h2>
+                    <div class="weather-detailed-card">
+                        <div id="weather-display">
+                            <p>Initializing live updates...</p>
+                        </div>
+                        <div class="sync-status">
+                            <span class="pulse-indicator"></span> 
+                            <span id="sync-time">Last updated: Never</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tasks-panel" class="dashboard-panel">
+                    <h2>Task Operations</h2>
+                    <form id="todo-form">
+                        <input type="text" id="todo-input" placeholder="Assign new operational task..." required>
+                        <button type="submit">Deploy</button>
+                    </form>
+                    <ul id="todo-list"></ul>
+                </section>
+
+            </div>
+        </div>
     </div>
 
-    <script href="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
