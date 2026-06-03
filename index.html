@@ -3,43 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminOS // Enterprise HUD</title>
+    <title>AdminOS // Tactical Interface</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hud-grid-overlay"></div>
+    <div class="crt-scanlines"></div>
 
     <div class="admin-wrapper">
+        
         <nav class="sidebar">
             <div class="sidebar-brand">
-                AdminOS<span class="blink-cursor">_</span>
+                AdminOS<span class="system-blink">_</span>
             </div>
-            <div class="tech-divider"></div>
+            
             <ul class="nav-links">
                 <li class="nav-item active" data-target="overview-panel">
-                    <span class="nav-icon">⚏</span> OVERVIEW
+                    <div class="nav-btn-matrix">
+                        <span class="matrix-icon">⚏</span>
+                        <span class="matrix-text">OVERVIEW</span>
+                    </div>
                 </li>
                 <li class="nav-item" data-target="weather-panel">
-                    <span class="nav-icon">☼</span> LIVE WEATHER
+                    <div class="nav-btn-matrix">
+                        <span class="matrix-icon">☼</span>
+                        <span class="matrix-text">LIVE WEATHER</span>
+                    </div>
                 </li>
                 <li class="nav-item" data-target="tasks-panel">
-                    <span class="nav-icon">⎔</span> TASK MANAGER
+                    <div class="nav-btn-matrix">
+                        <span class="matrix-icon">⎔</span>
+                        <span class="matrix-text">TASK MANAGER</span>
+                    </div>
                 </li>
             </ul>
-            <div class="sidebar-footer">SECURE DATA STREAM // ONLINE</div>
+
+            <div class="sidebar-status-tag">CORE STATUS // SECURE</div>
         </nav>
 
         <div class="main-content">
+            
             <header class="top-bar">
-                <div class="system-status">
-                    <span class="status-node pulse-green"></span>
+                <div class="hud-header-block">
+                    <div class="tech-corner tl"></div>
                     <div id="greeting">SYSTEMS ONLINE // ADMIN</div>
                 </div>
-                <div class="clock-container">
-                    <span class="terminal-prefix">TIME::</span>
+                <div class="hud-header-block clock-block">
+                    <span class="prefix-tag">SYNC::</span>
                     <div id="clock">00:00:00</div>
                 </div>
             </header>
@@ -47,50 +59,50 @@
             <div class="panel-container">
                 
                 <section id="overview-panel" class="dashboard-panel active">
-                    <h2 class="panel-title">// SYSTEM OVERVIEW MATRIX</h2>
+                    <h2 class="panel-cyber-title">// SYSTEM OVERVIEW MATRIX</h2>
                     <div class="analytics-grid">
-                        <div class="stat-card">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="card-label">TOTAL OPERATIONAL TASKS</div>
+                        <div class="cyber-stat-card">
+                            <div class="corner-accent tl"></div><div class="corner-accent tr"></div>
+                            <div class="stat-meta">TOTAL REGISTRY TASKS</div>
                             <p id="stat-total-tasks">0</p>
-                            <div class="card-graph-mock">|||||||||||||||||||||||||||||</div>
+                            <div class="mock-data-stream">|||||||||||||||||||||||||||||||||||||</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="card-label">COMPLETED OPERATIONS</div>
+                        <div class="cyber-stat-card">
+                            <div class="corner-accent tl"></div><div class="corner-accent tr"></div>
+                            <div class="stat-meta">COMPLETED PIPELINES</div>
                             <p id="stat-completed-tasks">0</p>
-                            <div class="card-graph-mock">|||||||||||||||||||||||||||||</div>
+                            <div class="mock-data-stream">|||||||||||||||||||||||||||||||||||||</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="card-corner tl"></div><div class="card-corner tr"></div>
-                            <div class="card-label">ATMOSPHERIC METRIC</div>
+                        <div class="cyber-stat-card">
+                            <div class="corner-accent tl"></div><div class="corner-accent tr"></div>
+                            <div class="stat-meta">ATMOSPHERIC TEMPERAMENT</div>
                             <p id="stat-temp">--°C</p>
-                            <div class="card-graph-mock">|||||||||||||||||||||||||||||</div>
+                            <div class="mock-data-stream">|||||||||||||||||||||||||||||||||||||</div>
                         </div>
                     </div>
                 </section>
 
                 <section id="weather-panel" class="dashboard-panel">
-                    <h2 class="panel-title">// ATMOSPHERIC TELEMETRY STREAM</h2>
-                    <div class="weather-detailed-card cyber-card">
-                        <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                    <h2 class="panel-cyber-title">// WEATHER ENGINE SUBSYSTEM</h2>
+                    <div class="cyber-panel-box">
+                        <div class="corner-accent tl"></div><div class="corner-accent tr"></div>
                         <div id="weather-display">
-                            <p class="analyzing-text">INITIALIZING GLOBAL TELEMETRY UPDATES...</p>
+                            <p class="booting-text">ESTABLISHING GEOLOCATION SENSOR DATA MAPPING...</p>
                         </div>
                         <div class="sync-status">
-                            <span class="pulse-indicator"></span> 
-                            <span id="sync-time">LAST COMPILATION: NEVER</span>
+                            <span class="neon-pulse-node"></span> 
+                            <span id="sync-time">LAST COMPILE: STANDBY</span>
                         </div>
                     </div>
                 </section>
 
                 <section id="tasks-panel" class="dashboard-panel">
-                    <h2 class="panel-title">// TACTICAL OPERATIONS CONTROLLER</h2>
-                    <div class="cyber-card">
-                        <div class="card-corner tl"></div><div class="card-corner tr"></div>
+                    <h2 class="panel-cyber-title">// TACTICAL COMPONENT CONTROLLER</h2>
+                    <div class="cyber-panel-box">
+                        <div class="corner-accent tl"></div><div class="corner-accent tr"></div>
                         <form id="todo-form">
-                            <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR..." required>
-                            <button type="submit" class="cyber-btn">DEPLOY</button>
+                            <input type="text" id="todo-input" placeholder="INPUT NEW OPERATIONAL VECTOR..." required autocomplete="off">
+                            <button type="submit" class="cyber-deploy-btn">DEPLOY</button>
                         </form>
                         <ul id="todo-list"></ul>
                     </div>
