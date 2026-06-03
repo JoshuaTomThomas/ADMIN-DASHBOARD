@@ -3,65 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminOS // Command Terminal v4.0</title>
+    <title>AdminOS // Strategic Command Deck</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hud-glitch-overlay"></div>
-    <div class="hud-matrix-grid"></div>
+    <div class="hud-scanline-matrix"></div>
+    <div class="hud-ambient-glow"></div>
 
     <div class="admin-wrapper">
         
         <nav class="sidebar">
             <div class="sidebar-brand">
-                <span class="tech-bracket">[</span> ADMIN_OS <span class="tech-bracket">]</span>
-                <div class="sub-brand">TAC-COM INTERFACE v4.02</div>
+                AdminOS<span class="cursor-flicker">_</span>
             </div>
             
             <ul class="nav-links">
                 <li class="nav-item active" data-target="overview-panel">
-                    <div class="nav-cyber-inner">
-                        <div class="nav-indicator"></div>
-                        <span class="matrix-text">01 // OVERVIEW MATRIX</span>
+                    <div class="nav-capsule">
+                        <span class="icon-node">⚏</span>
+                        <span class="label-node">OVERVIEW</span>
                     </div>
                 </li>
                 <li class="nav-item" data-target="weather-panel">
-                    <div class="nav-cyber-inner">
-                        <div class="nav-indicator"></div>
-                        <span class="matrix-text">02 // WEATHER TELEMETRY</span>
+                    <div class="nav-capsule">
+                        <span class="icon-node">☼</span>
+                        <span class="label-node">LIVE WEATHER</span>
                     </div>
                 </li>
                 <li class="nav-item" data-target="tasks-panel">
-                    <div class="nav-cyber-inner">
-                        <div class="nav-indicator"></div>
-                        <span class="matrix-text">03 // TASK OPERATIONS</span>
+                    <div class="nav-capsule">
+                        <span class="icon-node">⎔</span>
+                        <span class="label-node">TASK MANAGER</span>
                     </div>
                 </li>
             </ul>
 
-            <div class="sidebar-diagnostics">
-                <div>SYS_LOAD: 24.8%</div>
-                <div>GRID_LINK: STABLE</div>
-            </div>
+            <div class="sidebar-telemetry-tag">SECURE CORE LINK // ON</div>
         </nav>
 
         <div class="main-content">
             
             <header class="top-bar">
-                <div class="hud-header-panel left-panel">
-                    <span class="status-blinker"></span>
-                    <div id="greeting">INITIALIZING COMMAND MATRIX...</div>
+                <div class="header-status-block">
+                    <span class="status-indicator-dot green"></span>
+                    <div id="greeting">SYSTEMS OPERATIONAL // ADMIN_NODE</div>
                 </div>
                 
-                <div class="hud-center-crosshair">
-                    <span>▲</span> NODE_07 <span>▼</span>
+                <div class="header-center-divider">
+                    <span class="arrow-deco">▲</span> COGNITIVE FEED <span class="arrow-deco">▼</span>
                 </div>
 
-                <div class="hud-header-panel right-panel">
-                    <span class="prefix-tag">SYS_TIME //</span>
+                <div class="header-status-block clock-block">
+                    <span class="tag-prefix">SYS_CLK //</span>
                     <div id="clock">00:00:00</div>
                 </div>
             </header>
@@ -69,80 +65,92 @@
             <div class="panel-container">
                 
                 <section id="overview-panel" class="dashboard-panel active">
-                    <h2 class="panel-cyber-title">> COGNITIVE METRIC GRID</h2>
-                    <div class="analytics-grid">
-                        
-                        <div class="cyber-stat-card cyan-glow">
-                            <div class="tech-border-corner tl"></div><div class="tech-border-corner br"></div>
-                            <div class="stat-meta">DATA VECTOR REGISTRY</div>
-                            <div class="metric-wrapper">
+                    <h2 class="panel-section-title">// SYSTEM OVERVIEW MATRIX</h2>
+                    
+                    <div class="overview-subgrid">
+                        <div class="hud-nested-card blue-tint">
+                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                            <div class="card-header-label">TOTAL OPERATIONAL VECTORS</div>
+                            <div class="metric-display">
                                 <p id="stat-total-tasks">0</p>
-                                <div class="vector-loading-bar"><span style="width: 75%"></span></div>
+                                <div class="pure-css-graph bars">
+                                    <span style="height: 45%"></span><span style="height: 80%"></span>
+                                    <span style="height: 60%"></span><span style="height: 95%"></span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="cyber-stat-card magenta-glow">
-                            <div class="tech-border-corner tl"></div><div class="tech-border-corner br"></div>
-                            <div class="stat-meta">EXECUTED PIPELINES</div>
-                            <div class="metric-wrapper">
+                        <div class="hud-nested-card magenta-tint">
+                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                            <div class="card-header-label">COMPLETED WORKFLOW PIPELINES</div>
+                            <div class="metric-display">
                                 <p id="stat-completed-tasks">0</p>
-                                <div class="vector-loading-bar magenta"><span style="width: 45%"></span></div>
+                                <div class="pure-css-graph waves">
+                                    <span style="height: 30%"></span><span style="height: 75%"></span>
+                                    <span style="height: 40%"></span><span style="height: 85%"></span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="cyber-stat-card green-glow">
-                            <div class="tech-border-corner tl"></div><div class="tech-border-corner br"></div>
-                            <div class="stat-meta">THERMAL CORE FEED</div>
-                            <div class="metric-wrapper">
+                        <div class="hud-nested-card green-tint">
+                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                            <div class="card-header-label">AMBIENT HEAT CONDUCTION</div>
+                            <div class="metric-display">
                                 <p id="stat-temp">--°C</p>
-                                <div class="vector-loading-bar green"><span style="width: 60%"></span></div>
+                                <div class="hud-radial-loader">
+                                    <div class="radial-pulse-core"></div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
                 <section id="weather-panel" class="dashboard-panel">
-                    <h2 class="panel-cyber-title">> ATMOSPHERIC SCANNER ARRAY</h2>
-                    <div class="weather-hud-layout">
-                        
-                        <div class="cyber-panel-container telemetry-feed">
-                            <div class="panel-header-tag">DATALINK LOG</div>
+                    <h2 class="panel-section-title">// LIVE WEATHER TELEMETRY STATION</h2>
+                    
+                    <div class="weather-split-deck">
+                        <div class="hud-nested-card text-module">
+                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                            <div class="card-header-label">WEATHER STATION LOGS</div>
                             <div id="weather-display">
-                                <p class="loading-prompt">AWAITING SENSOR CALIBRATION...</p>
+                                <p class="loading-state-text">INITIALIZING GEOLOCATION COMPILATION FEED...</p>
                             </div>
                             <div class="sync-status">
-                                <span class="neon-pulse-node"></span>
+                                <span class="pulse-node-green"></span>
                                 <span id="sync-time">LAST COMPILATION: STANDBY</span>
                             </div>
                         </div>
 
-                        <div class="cyber-panel-container globe-deck">
-                            <div class="panel-header-tag">VISUAL TRACKING MATRIX</div>
-                            <div class="hologram-viewport">
-                                <svg class="svg-hud-rings" viewBox="0 0 200 200">
-                                    <circle class="ring-outer" cx="100" cy="100" r="85" />
-                                    <circle class="ring-middle" cx="100" cy="100" r="70" stroke-dasharray="10 15" />
-                                    <circle class="ring-inner" cx="100" cy="100" r="55" stroke-dasharray="5 5" />
+                        <div class="hud-nested-card graphic-module">
+                            <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                            <div class="card-header-label">VISUAL INTERFACE PLANE</div>
+                            <div class="hologram-viewport-frame">
+                                <svg class="hud-svg-circles" viewBox="0 0 200 200">
+                                    <circle class="outer-wire" cx="100" cy="100" r="85" />
+                                    <circle class="mid-dashed" cx="100" cy="100" r="70" stroke-dasharray="12 10" />
+                                    <circle class="inner-dotted" cx="100" cy="100" r="55" stroke-dasharray="4 6" />
                                 </svg>
-                                <div class="hologram-globe">
-                                    <div class="globe-grid-lines"></div>
+                                <div class="spinning-hologram-sphere">
+                                    <div class="sphere-grid-texture"></div>
                                 </div>
-                                <div class="laser-scanner-sweep"></div>
+                                <div class="laser-scanner-sweep-bar"></div>
                             </div>
                         </div>
-
                     </div>
                 </section>
 
                 <section id="tasks-panel" class="dashboard-panel">
-                    <h2 class="panel-cyber-title">> OPERATIONAL PIPELINE INTERFACES</h2>
-                    <div class="cyber-panel-container operational-deck">
-                        <div class="panel-header-tag">MANIFOLD CONTROLLER</div>
+                    <h2 class="panel-section-title">// TACTICAL OPERATIONS CONTROLLER</h2>
+                    
+                    <div class="hud-nested-card full-width-ops">
+                        <div class="bracket-deco tl"></div><div class="bracket-deco br"></div>
+                        <div class="card-header-label">MANIFOLD DISPATCH INTERFACE</div>
+                        
                         <form id="todo-form">
-                            <input type="text" id="todo-input" placeholder="INPUT OPERATIONAL DEPLOYMENT VECTOR..." required autocomplete="off">
-                            <button type="submit" class="cyber-deploy-button">DEPLOY_</button>
+                            <input type="text" id="todo-input" placeholder="ASSIGN NEW OPERATIONAL VECTOR..." required autocomplete="off">
+                            <button type="submit" class="hud-deploy-btn">DEPLOY_</button>
                         </form>
+                        
                         <ul id="todo-list"></ul>
                     </div>
                 </section>
